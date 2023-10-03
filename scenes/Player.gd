@@ -1,11 +1,12 @@
 extends CharacterBody3D
 
 
+@export var player_id = 1
 const SPEED = 8.0
 const JUMP_VELOCITY = 15.0
 const ROTATION_SPEED = 1.5
 const GRAVITY_FACTOR = 4.0
-var player_id = 0
+var has_money = false
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")

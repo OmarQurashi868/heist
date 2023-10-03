@@ -18,7 +18,7 @@ tonemap_mode = 3
 script = ExtResource("1_f05ku")
 
 [node name="Player" parent="." groups=["red"] instance=ExtResource("1_cb13m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.70047, 2.79362, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.40423, 9.63123)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_pij7h")
