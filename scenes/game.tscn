@@ -5,8 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://b2de8c80dj8ho" path="res://scenes/levels/level_1.tscn" id="2_autob"]
 
 [sub_resource type="Environment" id="Environment_pij7h"]
+background_mode = 2
 ambient_light_source = 3
 ambient_light_color = Color(1, 1, 1, 1)
+reflected_light_source = 2
+tonemap_mode = 3
 
 [node name="game" type="Node3D"]
 
@@ -18,12 +21,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.79362, 0)
 
 [node name="Player2" parent="." groups=["blue"] instance=ExtResource("1_cb13m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.79362, 1.1299)
+visible = false
 
 [node name="Player3" parent="." groups=["green"] instance=ExtResource("1_cb13m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.33953, 2.79362, 0)
+visible = false
 
 [node name="Player4" parent="." groups=["yellow"] instance=ExtResource("1_cb13m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.79362, -1.08807)
+visible = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_pij7h")

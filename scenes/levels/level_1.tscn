@@ -11,6 +11,7 @@ size = Vector3(2.07531, 0.618938, 1.31074)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 92.1084, 0)
+visible = false
 
 [node name="level_manager" type="Node3D" parent="."]
 script = ExtResource("1_j4ypp")
