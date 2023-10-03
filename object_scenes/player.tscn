@@ -21,3 +21,6 @@ transform = Transform3D(0.999808, 0.0196162, -4.76408e-09, -0.0194886, 0.993305,
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_swqqn")
+
+[node name="money_bag_slot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.604893, 1.04714)
