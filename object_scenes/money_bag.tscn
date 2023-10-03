@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://r7w2hg7uhym4"]
+
+[ext_resource type="Script" path="res://object_scenes/money_bag.gd" id="1_h42n4"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_iqqt7"]
+
+[node name="money_bag" type="Area3D"]
+script = ExtResource("1_h42n4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_iqqt7")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

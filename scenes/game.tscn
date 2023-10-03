@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://dqgh0ag1pa1br"]
+
+[ext_resource type="PackedScene" uid="uid://damma4k485jxg" path="res://object_scenes/player.tscn" id="1_cb13m"]
+[ext_resource type="Script" path="res://scenes/game_manager.gd" id="1_f05ku"]
+[ext_resource type="PackedScene" uid="uid://b2de8c80dj8ho" path="res://scenes/levels/level_1.tscn" id="2_autob"]
+
+[sub_resource type="Environment" id="Environment_pij7h"]
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+
+[node name="game" type="Node3D"]
+
+[node name="game_manager" type="Node3D" parent="."]
+script = ExtResource("1_f05ku")
+
+[node name="Player" parent="." groups=["red"] instance=ExtResource("1_cb13m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.79362, 0)
+
+[node name="Player2" parent="." groups=["blue"] instance=ExtResource("1_cb13m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.79362, 1.1299)
+
+[node name="Player3" parent="." groups=["green"] instance=ExtResource("1_cb13m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.33953, 2.79362, 0)
+
+[node name="Player4" parent="." groups=["yellow"] instance=ExtResource("1_cb13m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.79362, -1.08807)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_pij7h")
+
+[node name="level_1" parent="." instance=ExtResource("2_autob")]
