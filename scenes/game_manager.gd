@@ -48,7 +48,7 @@ func spawn_players() -> void:
 		player.add_to_group(teams[i].name)
 		
 		# This function needs to be called because all of it's calls need to happen at the end
-		parent_and_move.call_deferred(player, teams[i].spawn_position)
+		parent_and_adjust.call_deferred(player, teams[i].spawn_position)
 		
 		# Declare and rename cameras
 		var camera_node = player.get_node("Camera3D")
@@ -85,11 +85,14 @@ func grab_bag(player_id) -> void:
 	pass
 
 
-func parent_and_move(player: CharacterBody3D, team_spawn: Vector3) -> void:
-	get_parent().add_child(player)
-	player.global_position = team_spawn
+func parent_and_adjust(player: CharacterBody3D, team_spawn: Vector3) -> void:
 	# This was seperated because the second call needs to happen after the first one
 	# and the first one needs to be call_deffered
+	get_parent().add_child(player)
+	player.global_position = team_spawn
+	
+	# Rotate  camera to the center of the map
+	player.look_at(Vector3(0, player.position.y, 0))
 
 
 func _get_team_by_name(team_name: String) -> Team:
