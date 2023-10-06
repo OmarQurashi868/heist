@@ -22,7 +22,7 @@ func spawn_player():
 		var plr = player_scene.instantiate()
 		plr.name += str(i+1)
 		get_parent().add_child.call_deferred(plr)
-		plr.player_id += i + 1
+		plr.player_id += i
 		plr.add_to_group(team_order[i])
 		plr.global_position = team_spawns[i]
 		print(plr.player_id)
@@ -48,6 +48,6 @@ func touch_base(player_id, team):
 	# print(team_scores)
 
 func grab_bag(player_id):
-	money_bag.is_picked_up = true
+	pass
 	# player.has_money = true
 	
