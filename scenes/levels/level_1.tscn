@@ -17,6 +17,7 @@ size = Vector3(2, 15, 25)
 size = Vector3(2, 15, 25)
 
 [node name="level_1" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.725107, -0.927549, 0.340236)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 92.1084, 0)
@@ -62,16 +63,16 @@ shape = SubResource("BoxShape3D_bielj")
 transform = Transform3D(0.765, 0, 0, 0, 0.765, 0, 0, 0, 0.765, 0, 0, 0)
 
 [node name="team_red_spawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.78987, 54.8645)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.46535, 54.8645)
 
 [node name="team_blue_spawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.7527, 8.78987, -0.484543)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.7527, 6.46535, -0.484543)
 
 [node name="team_green_spawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.049778, 8.78987, -52.9409)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.049778, 6.46535, -52.9409)
 
 [node name="team_yellow_spawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -58.1766, 8.78987, 0.24369)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -58.1766, 6.46535, 0.24369)
 
 [connection signal="body_entered" from="base_red" to="level_manager" method="_on_base_red_body_entered"]
 [connection signal="body_entered" from="base_blue" to="level_manager" method="_on_base_blue_body_entered"]

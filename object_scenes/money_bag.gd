@@ -25,4 +25,4 @@ func _on_body_entered(body):
 	if body.is_in_group("player") and not is_picked_up:
 		is_picked_up = true
 		carrier = body
-		# game_manager.grab_bag(0)
+		game_manager.grab_bag(0)
