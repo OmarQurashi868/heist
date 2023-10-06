@@ -16,17 +16,17 @@ size = Vector3(2, 15, 25)
 [sub_resource type="BoxShape3D" id="BoxShape3D_bielj"]
 size = Vector3(2, 15, 25)
 
-[node name="level_1" type="Node3D"]
+[node name="LevelTest" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.725107, -0.927549, 0.340236)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 92.1084, 0)
 visible = false
 
-[node name="level_manager" type="Node3D" parent="."]
+[node name="LevelManager" type="Node3D" parent="."]
 script = ExtResource("1_j4ypp")
 
-[node name="money_bag_spawn" type="Node3D" parent="."]
+[node name="MoneyBagSpawn" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.44642, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -34,47 +34,47 @@ visible = false
 mesh = ExtResource("1_3x4fm")
 skeleton = NodePath("")
 
-[node name="base_red" type="Area3D" parent="." groups=["base", "red"]]
+[node name="Base0" type="Area3D" parent="." groups=["base", "red"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 65)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="base_red"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Base0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.188935, 0.10463, 0.248833)
 shape = SubResource("BoxShape3D_kaa4x")
 
-[node name="base_blue" type="Area3D" parent="." groups=["base", "blue"]]
+[node name="Base1" type="Area3D" parent="." groups=["base", "blue"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, -65)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="base_blue"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Base1"]
 shape = SubResource("BoxShape3D_nnjup")
 
-[node name="base_green" type="Area3D" parent="." groups=["base", "green"]]
+[node name="Base2" type="Area3D" parent="." groups=["base", "green"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 65, 6, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="base_green"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Base2"]
 shape = SubResource("BoxShape3D_8fwug")
 
-[node name="base_yellow" type="Area3D" parent="." groups=["base", "yellow"]]
+[node name="Base3" type="Area3D" parent="." groups=["base", "yellow"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65, 6, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="base_yellow"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Base3"]
 shape = SubResource("BoxShape3D_bielj")
 
-[node name="heist map" parent="." instance=ExtResource("3_t2qlr")]
+[node name="HeistMap" parent="." instance=ExtResource("3_t2qlr")]
 transform = Transform3D(0.765, 0, 0, 0, 0.765, 0, 0, 0, 0.765, 0, 0, 0)
 
-[node name="team_red_spawn" type="Node3D" parent="."]
+[node name="SpawnPoint0" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.46535, 54.8645)
 
-[node name="team_blue_spawn" type="Node3D" parent="."]
+[node name="SpawnPoint1" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.7527, 6.46535, -0.484543)
 
-[node name="team_green_spawn" type="Node3D" parent="."]
+[node name="SpawnPoint2" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.049778, 6.46535, -52.9409)
 
-[node name="team_yellow_spawn" type="Node3D" parent="."]
+[node name="SpawnPoint3" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -58.1766, 6.46535, 0.24369)
 
-[connection signal="body_entered" from="base_red" to="level_manager" method="_on_base_red_body_entered"]
-[connection signal="body_entered" from="base_blue" to="level_manager" method="_on_base_blue_body_entered"]
-[connection signal="body_entered" from="base_green" to="level_manager" method="_on_base_green_body_entered"]
-[connection signal="body_entered" from="base_yellow" to="level_manager" method="_on_base_yellow_body_entered"]
+[connection signal="body_entered" from="Base0" to="LevelManager" method="_on_base_red_body_entered"]
+[connection signal="body_entered" from="Base1" to="LevelManager" method="_on_base_blue_body_entered"]
+[connection signal="body_entered" from="Base2" to="LevelManager" method="_on_base_green_body_entered"]
+[connection signal="body_entered" from="Base3" to="LevelManager" method="_on_base_yellow_body_entered"]

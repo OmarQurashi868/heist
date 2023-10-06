@@ -1,38 +1,61 @@
 extends Node3D
 
-@onready var money_bag: Area3D = $"../money_bag"
-#@onready var player: CharacterBody3D = $"../Player"
+class Team:
+	var name: String
+	var color: Color
+	var score: int
+	var spawn_position
+	
+	func _init(given_name: String, given_color: Color, given_spawn_position = Vector3.ZERO, given_score: int = 0):
+		self.name = given_name
+		self.color = given_color
+		self.spawn_position = given_spawn_position
+		self.score = given_score
+	
+	func add_score():
+		self.score += 1
+
+
+@onready var money_bag: Area3D = $"../MoneyBag"
 @export var player_scene: PackedScene = preload("res://object_scenes/player.tscn")
-@export var players_num = 4
-@export var current_map = "level_1"
+@export_range(1,4) var players_num = 4
+@export var current_map = "LevelTest"
 
-# Taking the spawns nodes positions
-@onready var team_red_spawner_position = get_node("../" + current_map + "/team_red_spawn").global_position
-@onready var team_blue_spawner_position = get_node("../" + current_map + "/team_blue_spawn").global_position
-@onready var team_green_spawner_position = get_node("../" + current_map + "/team_green_spawn").global_position
-@onready var team_yellow_spawner_position = get_node("../" + current_map + "/team_yellow_spawn").global_position
+var teams = [
+	Team.new("red", Color(1.0, 0, 0, 1)),
+	Team.new("blue", Color(0, 0, 1.0, 1)),
+	Team.new("green", Color(0, 1.0, 0, 1)),
+	Team.new("yellow", Color(1.0, 1.0, 0, 1))
+]
 
-var team_scores = {"red": 0, "blue": 0, "green": 0, "yellow": 0}
-var team_order = ["red", "blue", "green", "yellow" ]
+func _ready():
+	prepare_teams()
+	spawn_players()
 
-func spawn_player():
-	var team_spawns = [team_red_spawner_position, team_blue_spawner_position, team_green_spawner_position, team_yellow_spawner_position]
+func spawn_players() -> void:
+	#var team_spawns = [team_red_spawner_position, team_blue_spawner_position, team_green_spawner_position, team_yellow_spawner_position]
 	for i in range(players_num):
-		# Spawn new player > modify its properties > move position to spawn point
-		var plr = player_scene.instantiate()
-		plr.name += str(i + 1)
-		plr.player_id += i
-		plr.add_to_group(team_order[i])
-		get_parent().add_child.call_deferred(plr)
-		plr.global_position = team_spawns[i]
+		# Spawn new player and modify its properties
+		var player = player_scene.instantiate()
+		player.name += str(i)
+		player.player_id += i
+		
+		# Change the material for each player
+		var mesh: MeshInstance3D = player.get_node("MeshInstance3D")
+		mesh.mesh.material = mesh.mesh.material.duplicate()
+		mesh.mesh.material.albedo_color = teams[i].color
+		player.add_to_group(teams[i].name)
+		
+		# This function needs to be called because all of it's calls need to happen at the end
+		parent_and_move.call_deferred(player, teams[i].spawn_position)
 		
 		# Declare and rename cameras
-		var camera_node = plr.get_node("Camera3D")
-		var camera_slot = plr.get_node("camera_slot")
-		camera_node.name += str(i + 1)
+		var camera_node = player.get_node("Camera3D")
+		var camera_slot = player.get_node("CameraSlot")
+		camera_node.name += str(i)
 		
 		# Reparent camera to Subviewports
-		var viewport_path = "GridContainer/SubViewportContainer" + str(i + 1) + "/SubViewport"
+		var viewport_path = "GridContainer/SubViewportContainer" + str(i) + "/SubViewport"
 		var viewport = get_parent().get_node(viewport_path)
 		camera_node.get_parent().remove_child(camera_node)
 		viewport.add_child(camera_node)
@@ -43,15 +66,41 @@ func spawn_player():
 		camera_slot.add_child(remote_transform)
 
 
-func _ready():
-	spawn_player()
+func prepare_teams() -> void:
+	for i in range(len(teams)):
+		teams[i].spawn_position = get_node("../" + current_map + "/SpawnPoint" + str(i)).global_position
 
-func touch_base(player_id, team):
-	# if player.has_money:
-		team_scores[team] += 1
-	# print(team_scores)
 
-func grab_bag(player_id):
+func touch_base(player_id, team_id) -> void:
+	# TODO
+	#if player.has_money:
+		teams[team_id].add_score()
+	#print(team_scores)
+
+
+func grab_bag(player_id) -> void:
+	# TODO
+	#player.has_money = true
 	pass
-	# player.has_money = true
-	
+
+
+func parent_and_move(player: CharacterBody3D, team_spawn: Vector3) -> void:
+	get_parent().add_child(player)
+	player.global_position = team_spawn
+	# This was seperated because the second call needs to happen after the first one
+	# and the first one needs to be call_deffered
+
+
+func _get_team_by_name(team_name: String) -> Team:
+	for team in teams:
+		if team.name == team_name:
+			return team
+	return null
+
+
+func get_player_by_id(player_id: int) -> CharacterBody3D:
+	var players = get_tree().get_nodes_in_group("player")
+	for player in players:
+		if player.player_id == player_id:
+			return player
+	return null

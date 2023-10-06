@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dqgh0ag1pa1br"]
 
 [ext_resource type="Script" path="res://scenes/game_manager.gd" id="1_f05ku"]
-[ext_resource type="PackedScene" uid="uid://b2de8c80dj8ho" path="res://scenes/levels/level_1.tscn" id="2_autob"]
+[ext_resource type="PackedScene" uid="uid://b2de8c80dj8ho" path="res://scenes/levels/level_test.tscn" id="2_autob"]
 [ext_resource type="PackedScene" uid="uid://r7w2hg7uhym4" path="res://object_scenes/money_bag.tscn" id="4_e1qbj"]
 
 [sub_resource type="Environment" id="Environment_pij7h"]
@@ -11,16 +11,19 @@ ambient_light_color = Color(1, 1, 1, 1)
 reflected_light_source = 2
 tonemap_mode = 3
 
-[node name="game" type="Node3D"]
+[node name="Game" type="Node3D"]
 
-[node name="game_manager" type="Node3D" parent="."]
+[node name="GameManager" type="Node3D" parent="."]
 script = ExtResource("1_f05ku")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_pij7h")
 
-[node name="level_1" parent="." instance=ExtResource("2_autob")]
+[node name="LevelTest" parent="." instance=ExtResource("2_autob")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="MoneyBag" parent="." instance=ExtResource("4_e1qbj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.63489, 0)
 
 [node name="GridContainer" type="GridContainer" parent="."]
 offset_right = 1280.0
@@ -30,6 +33,14 @@ size_flags_vertical = 3
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 columns = 2
+
+[node name="SubViewportContainer0" type="SubViewportContainer" parent="GridContainer"]
+layout_mode = 2
+
+[node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer0"]
+handle_input_locally = false
+size = Vector2i(640, 360)
+render_target_update_mode = 4
 
 [node name="SubViewportContainer1" type="SubViewportContainer" parent="GridContainer"]
 layout_mode = 2
@@ -54,14 +65,3 @@ layout_mode = 2
 handle_input_locally = false
 size = Vector2i(640, 360)
 render_target_update_mode = 4
-
-[node name="SubViewportContainer4" type="SubViewportContainer" parent="GridContainer"]
-layout_mode = 2
-
-[node name="SubViewport" type="SubViewport" parent="GridContainer/SubViewportContainer4"]
-handle_input_locally = false
-size = Vector2i(640, 360)
-render_target_update_mode = 4
-
-[node name="money_bag" parent="." instance=ExtResource("4_e1qbj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.81946, 0)
