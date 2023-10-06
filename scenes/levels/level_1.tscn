@@ -61,6 +61,18 @@ shape = SubResource("BoxShape3D_bielj")
 [node name="heist map" parent="." instance=ExtResource("3_t2qlr")]
 transform = Transform3D(0.765, 0, 0, 0, 0.765, 0, 0, 0, 0.765, 0, 0, 0)
 
+[node name="team_red_spawn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.78987, 54.8645)
+
+[node name="team_blue_spawn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.7527, 8.78987, -0.484543)
+
+[node name="team_green_spawn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.049778, 8.78987, -52.9409)
+
+[node name="team_yellow_spawn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -58.1766, 8.78987, 0.24369)
+
 [connection signal="body_entered" from="base_red" to="level_manager" method="_on_base_red_body_entered"]
 [connection signal="body_entered" from="base_blue" to="level_manager" method="_on_base_blue_body_entered"]
 [connection signal="body_entered" from="base_green" to="level_manager" method="_on_base_green_body_entered"]
