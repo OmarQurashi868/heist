@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dqgh0ag1pa1br"]
+[gd_scene load_steps=6 format=3 uid="uid://dqgh0ag1pa1br"]
 
 [ext_resource type="Script" path="res://scenes/game_manager.gd" id="1_f05ku"]
 [ext_resource type="PackedScene" uid="uid://b2de8c80dj8ho" path="res://scenes/levels/level_1.tscn" id="2_autob"]
+[ext_resource type="PackedScene" uid="uid://damma4k485jxg" path="res://object_scenes/player.tscn" id="4_7bluh"]
 [ext_resource type="PackedScene" uid="uid://r7w2hg7uhym4" path="res://object_scenes/money_bag.tscn" id="4_e1qbj"]
 
 [sub_resource type="Environment" id="Environment_pij7h"]
@@ -23,3 +24,7 @@ environment = SubResource("Environment_pij7h")
 
 [node name="money_bag" parent="." instance=ExtResource("4_e1qbj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.56973, 0)
+
+[node name="Player" parent="." instance=ExtResource("4_7bluh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.692, 47.0857, 47.4953)
+visible = false

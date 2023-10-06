@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://damma4k485jxg"]
+[gd_scene load_steps=6 format=3 uid="uid://damma4k485jxg"]
 
 [ext_resource type="Script" path="res://scenes/Player.gd" id="1_xk6m8"]
+[ext_resource type="PackedScene" uid="uid://kyk47i158d1a" path="res://object_scenes/money_bag_slot.tscn" id="2_wec5w"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0tp6i"]
 
@@ -23,5 +24,4 @@ current = true
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_swqqn")
 
-[node name="money_bag_slot" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.604893, 1.04714)
+[node name="money_bag_slot" parent="." instance=ExtResource("2_wec5w")]
