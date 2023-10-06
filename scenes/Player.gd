@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 
-var player_id = 0
+@export var player_id = 0
 const SPEED = 8.0
 const JUMP_VELOCITY = 15.0
 const ROTATION_SPEED = 1.5

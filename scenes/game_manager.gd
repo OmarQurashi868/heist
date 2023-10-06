@@ -21,11 +21,11 @@ func spawn_player():
 	for i in range(players_num):
 		var plr = player_scene.instantiate()
 		plr.name += str(i+1)
-		player.player_id += 1
 		get_parent().add_child.call_deferred(plr)
+		plr.player_id += i + 1
 		plr.add_to_group(team_order[i])
 		plr.global_position = team_spawns[i]
-		print(player.player_id)
+		print(plr.player_id)
 		
 			
 		
