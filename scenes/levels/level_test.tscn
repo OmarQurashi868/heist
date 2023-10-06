@@ -1,6 +1,5 @@
-[gd_scene load_steps=8 format=3 uid="uid://b2de8c80dj8ho"]
+[gd_scene load_steps=7 format=3 uid="uid://b2de8c80dj8ho"]
 
-[ext_resource type="ArrayMesh" uid="uid://dtbhyrmmux0sy" path="res://assets/models/heist map.obj" id="1_3x4fm"]
 [ext_resource type="Script" path="res://scenes/levels/level_manager.gd" id="1_j4ypp"]
 [ext_resource type="PackedScene" uid="uid://daelj74dp0uba" path="res://assets/blender/heist map.blend" id="3_t2qlr"]
 
@@ -20,19 +19,14 @@ size = Vector3(2, 15, 25)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.725107, -0.927549, 0.340236)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 92.1084, 0)
-visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 48.7505, 0)
+light_energy = 1.355
 
 [node name="LevelManager" type="Node3D" parent="."]
 script = ExtResource("1_j4ypp")
 
 [node name="MoneyBagSpawn" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.44642, 0)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-visible = false
-mesh = ExtResource("1_3x4fm")
-skeleton = NodePath("")
 
 [node name="Base0" type="Area3D" parent="." groups=["base", "red"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 65)

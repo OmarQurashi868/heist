@@ -1,13 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://dqgh0ag1pa1br"]
+[gd_scene load_steps=7 format=3 uid="uid://dqgh0ag1pa1br"]
 
 [ext_resource type="Script" path="res://scenes/game_manager.gd" id="1_f05ku"]
 [ext_resource type="PackedScene" uid="uid://b2de8c80dj8ho" path="res://scenes/levels/level_test.tscn" id="2_autob"]
 [ext_resource type="PackedScene" uid="uid://r7w2hg7uhym4" path="res://object_scenes/money_bag.tscn" id="4_e1qbj"]
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4b2yv"]
+
+[sub_resource type="Sky" id="Sky_fmplq"]
+sky_material = SubResource("ProceduralSkyMaterial_4b2yv")
+
 [sub_resource type="Environment" id="Environment_pij7h"]
 background_mode = 2
+background_camera_feed_id = 7
+sky = SubResource("Sky_fmplq")
 ambient_light_source = 3
-ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_color = Color(0.870588, 0.87451, 0.619608, 1)
 reflected_light_source = 2
 tonemap_mode = 3
 
