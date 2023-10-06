@@ -42,8 +42,9 @@ func spawn_players() -> void:
 		
 		# Change the material for each player
 		var mesh: MeshInstance3D = player.get_node("MeshInstance3D")
-		mesh.mesh.material = mesh.mesh.material.duplicate()
-		mesh.mesh.material.albedo_color = teams[i].color
+		var new_material = StandardMaterial3D.new()
+		new_material.albedo_color = teams[i].color
+		mesh.material_override = new_material
 		player.add_to_group(teams[i].name)
 		
 		# This function needs to be called because all of it's calls need to happen at the end

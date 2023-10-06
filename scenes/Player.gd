@@ -9,7 +9,7 @@ const GRAVITY_FACTOR = 4.0
 var has_money = false
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")	
 
 func _physics_process(delta):
 	# Add the gravity.
