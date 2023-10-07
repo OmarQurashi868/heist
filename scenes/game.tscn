@@ -72,3 +72,41 @@ layout_mode = 2
 handle_input_locally = false
 size = Vector2i(640, 360)
 render_target_update_mode = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -640.0
+offset_top = -180.0
+offset_right = 640.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 120
+alignment = 1
+
+[node name="ScoreLabel0" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 86
+text = "0"
+
+[node name="ScoreLabel1" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.537255, 0.964706, 1)
+theme_override_font_sizes/font_size = 86
+text = "0"
+
+[node name="ScoreLabel2" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.129412, 0.647059, 0, 1)
+theme_override_font_sizes/font_size = 86
+text = "0"
+
+[node name="ScoreLabel3" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_font_sizes/font_size = 86
+text = "0"

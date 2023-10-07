@@ -20,6 +20,7 @@ class Team:
 
 
 @onready var money_bag: Area3D = $"../MoneyBag"
+@onready var score_label_path: String = "../HBoxContainer/ScoreLabel"
 @export var player_scene: PackedScene = preload("res://object_scenes/player.tscn")
 @export_range(1,4) var players_num = 4
 @export var current_map = "LevelTest"
@@ -81,7 +82,8 @@ func prepare_teams() -> void:
 func touch_base(player_id, team_id) -> void:
 	if player_id == carrier_player_id and teams[team_id].has_money:
 		teams[team_id].add_score()
-		print(teams[team_id].score)
+		var score_label = get_node(score_label_path + str(team_id))
+		score_label.text = str(teams[team_id].score)
 
 
 func grab_bag(player_id, team_name) -> void:
