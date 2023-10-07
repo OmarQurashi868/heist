@@ -5,7 +5,9 @@ var is_picked_up = false
 @export var amp = 0.5
 @export var freq = 0.5
 @export var speed = 6
+signal money_bag_picked_up(team)
 var carrier: CharacterBody3D
+
 
 # Called when the node enters the scene tree for the first time.
 func _physics_process(delta):
@@ -19,10 +21,10 @@ func _physics_process(delta):
 		angle += 2 * 3.14 * delta
 		position.y = sin(angle * freq) * amp + 2
 		
-
-
 func _on_body_entered(body):
 	if body.is_in_group("player") and not is_picked_up:
 		is_picked_up = true
-		game_manager.grab_bag(body.player_id)
 		carrier = body
+		var carrier_team = body.get_groups()[1]
+		var player_id = body.player_id
+		emit_signal("money_bag_picked_up", player_id, carrier_team)
