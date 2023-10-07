@@ -16,7 +16,6 @@ class Team:
 	
 	func add_score():
 		self.score += 1
-	
 
 
 @onready var money_bag: Area3D = $"../MoneyBag"
@@ -34,6 +33,7 @@ var teams: Array[Team] = [
 	Team.new("yellow", Color(1.0, 1.0, 0, 1))
 ]
 
+
 func _ready():
 	prepare_teams()
 	spawn_players()
@@ -46,7 +46,6 @@ func spawn_players() -> void:
 		player.name += str(i)
 		player.player_id = i
 		player.add_to_group(teams[i].name)
-		print(teams[i].name)
 		
 		# This function needs to be called because all of it's calls need to happen at the end
 		parent_and_adjust.call_deferred(player, teams[i].spawn_position)
@@ -97,6 +96,7 @@ func drop_bag():
 	var carrier_team = get_carrier_team()
 	carrier_team.has_money = false
 
+
 func parent_and_adjust(player: CharacterBody3D, team_spawn: Vector3) -> void:
 	# This was seperated because the second call needs to happen after the first one
 	# and the first one needs to be call_deffered
@@ -112,6 +112,7 @@ func get_team_by_name(team_name: String) -> Team:
 		if team.name == team_name:
 			return team
 	return null
+
 
 func get_carrier_team() -> Team:
 	for team in teams:

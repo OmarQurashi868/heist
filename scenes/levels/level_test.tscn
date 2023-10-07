@@ -68,7 +68,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55, 6.5, 0)
 [node name="SpawnPoint3" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -55, 6.5, 0)
 
-[connection signal="body_entered" from="Base0" to="LevelManager" method="_on_base_0_body_entered"]
 [connection signal="body_entered" from="Base0" to="LevelManager" method="_on_base_red_body_entered"]
 [connection signal="body_entered" from="Base1" to="LevelManager" method="_on_base_blue_body_entered"]
 [connection signal="body_entered" from="Base2" to="LevelManager" method="_on_base_green_body_entered"]

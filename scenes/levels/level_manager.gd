@@ -3,10 +3,11 @@ extends Node3D
 @onready var game_manager: Node3D = $"../../GameManager"
 @onready var money_bag: Node3D = $"../../MoneyBag"
 
+
 func _ready():
 	money_bag.connect("money_bag_picked_up", _on_money_bag_picked_up)
-	
-	
+
+
 func _on_base_red_body_entered(body):
 	if body.is_in_group("player") and body.is_in_group("red"):
 		game_manager.touch_base(body.player_id, 0)

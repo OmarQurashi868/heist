@@ -20,7 +20,8 @@ func _physics_process(delta):
 		var angle = 0
 		angle += 2 * 3.14 * delta
 		position.y = sin(angle * freq) * amp + 2
-		
+
+
 func _on_body_entered(body):
 	if body.is_in_group("player") and not is_picked_up:
 		is_picked_up = true
