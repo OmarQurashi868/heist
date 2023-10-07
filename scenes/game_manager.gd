@@ -4,7 +4,7 @@ class Team:
 	var name: String
 	var color: Color
 	var score: int
-	var spawn_position
+	var spawn_position: Vector3
 	
 	func _init(given_name: String, given_color: Color, given_spawn_position = Vector3.ZERO, given_score: int = 0):
 		self.name = given_name
@@ -33,12 +33,14 @@ func _ready():
 	spawn_players()
 
 func spawn_players() -> void:
-	#var team_spawns = [team_red_spawner_position, team_blue_spawner_position, team_green_spawner_position, team_yellow_spawner_position]
 	for i in range(players_num):
 		# Spawn new player and modify its properties
 		var player = player_scene.instantiate()
 		player.name += str(i)
-		player.player_id += i
+		player.player_id = i
+		print(player.player_id)
+		# This function needs to be called because all of it's calls need to happen at the end
+		parent_and_adjust.call_deferred(player, teams[i].spawn_position)
 		
 		# Change the material for each player
 		var mesh: MeshInstance3D = player.get_node("MeshInstance3D")
@@ -47,8 +49,6 @@ func spawn_players() -> void:
 		mesh.material_override = new_material
 		player.add_to_group(teams[i].name)
 		
-		# This function needs to be called because all of it's calls need to happen at the end
-		parent_and_adjust.call_deferred(player, teams[i].spawn_position)
 		
 		# Declare and rename cameras
 		var camera_node = player.get_node("Camera3D")
