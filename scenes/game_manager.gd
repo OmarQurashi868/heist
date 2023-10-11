@@ -47,7 +47,6 @@ func spawn_players() -> void:
 		player.name += str(i)
 		player.player_id = i
 		player.add_to_group(teams[i].name)
-		
 		# This function needs to be called because all of it's calls need to happen at the end
 		parent_and_adjust.call_deferred(player, teams[i].spawn_position)
 		
@@ -83,6 +82,7 @@ func grab_bag(player_id, team_name) -> void:
 	var team = get_team_by_name(team_name)
 	carrier_player_id = player_id
 	team.has_money = true
+	#print(carrier_player_id)
 
 
 func touch_base(player_id, team_id) -> void:
@@ -94,14 +94,16 @@ func touch_base(player_id, team_id) -> void:
 
 
 func respawn_bag() -> void:
-	money_bag.queue_free()
-	var new_money_bag = money_bag_scene.instantiate()
+	
+	
 	var money_bag_spawn_pos = get_node("../" + current_map + "/MoneyBagSpawn").global_position
-	get_parent().add_child(new_money_bag)
-	new_money_bag.global_position = money_bag_spawn_pos
-	new_money_bag.is_picked_up = false
-	money_bag = new_money_bag
+	money_bag.global_position = money_bag_spawn_pos
 	drop_bag()
+	
+
+
+func rename_money_bag(new_money_bag):
+	new_money_bag.name = "MoneyBag"
 
 
 func drop_bag():
