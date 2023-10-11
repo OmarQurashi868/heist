@@ -19,6 +19,7 @@ class Team:
 
 
 @onready var money_bag: Area3D = $"../MoneyBag"
+@onready var money_bag_scene: PackedScene = preload("res://object_scenes/money_bag.tscn")
 @onready var score_label_path: String = "../HBoxContainer/ScoreLabel"
 @export var player_scene: PackedScene = preload("res://object_scenes/player.tscn")
 @export_range(1,4) var players_num = 4
@@ -72,17 +73,9 @@ func spawn_players() -> void:
 		remote_transform.remote_path = camera_node.get_path()
 		camera_slot.add_child(remote_transform)
 
-
 func prepare_teams() -> void:
 	for i in range(len(teams)):
 		teams[i].spawn_position = get_node("../" + current_map + "/SpawnPoint" + str(i)).global_position
-
-
-func touch_base(player_id, team_id) -> void:
-	if player_id == carrier_player_id and teams[team_id].has_money:
-		teams[team_id].add_score()
-		var score_label = get_node(score_label_path + str(team_id))
-		score_label.text = str(teams[team_id].score)
 
 
 func grab_bag(player_id, team_name) -> void:
@@ -90,6 +83,24 @@ func grab_bag(player_id, team_name) -> void:
 	carrier_player_id = player_id
 	team.has_money = true
 
+
+func touch_base(player_id, team_id) -> void:
+	if player_id == carrier_player_id and teams[team_id].has_money:
+		teams[team_id].add_score()
+		var score_label = get_node(score_label_path + str(team_id))
+		score_label.text = str(teams[team_id].score)
+		respawn_bag.call_deferred()
+
+
+func respawn_bag() -> void:
+	money_bag.queue_free()
+	var new_money_bag = money_bag_scene.instantiate()
+	var money_bag_spawn_pos = get_node("../" + current_map + "/MoneyBagSpawn").global_position
+	get_parent().add_child(new_money_bag)
+	new_money_bag.global_position = money_bag_spawn_pos
+	new_money_bag.is_picked_up = false
+	money_bag = new_money_bag
+	drop_bag()
 
 func drop_bag():
 	carrier_player_id = -1

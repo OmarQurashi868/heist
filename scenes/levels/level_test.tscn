@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://b2de8c80dj8ho"]
+[gd_scene load_steps=6 format=3 uid="uid://b2de8c80dj8ho"]
 
 [ext_resource type="Script" path="res://scenes/levels/level_manager.gd" id="1_j4ypp"]
-[ext_resource type="PackedScene" uid="uid://daelj74dp0uba" path="res://assets/blender/heist map.blend" id="3_t2qlr"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kaa4x"]
 size = Vector3(25, 15, 2)
@@ -53,7 +52,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65, 6, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Base3"]
 shape = SubResource("BoxShape3D_bielj")
 
-[node name="HeistMap" parent="." instance=ExtResource("3_t2qlr")]
+[node name="HeistMap" type="Node3D" parent="."]
 transform = Transform3D(0.765, 0, 0, 0, 0.765, 0, 0, 0, 0.765, 0, 0, 0)
 
 [node name="SpawnPoint0" type="Node3D" parent="."]
@@ -69,8 +68,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 55, 6.5, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -55, 6.5, 0)
 
 [connection signal="body_entered" from="Base0" to="LevelManager" method="_on_base_red_body_entered"]
+[connection signal="body_entered" from="Base0" to="LevelManager" method="_on_base_0_body_entered"]
 [connection signal="body_entered" from="Base1" to="LevelManager" method="_on_base_blue_body_entered"]
 [connection signal="body_entered" from="Base2" to="LevelManager" method="_on_base_green_body_entered"]
 [connection signal="body_entered" from="Base3" to="LevelManager" method="_on_base_yellow_body_entered"]
-
-[editable path="HeistMap"]
