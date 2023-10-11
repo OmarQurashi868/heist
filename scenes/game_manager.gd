@@ -73,6 +73,7 @@ func spawn_players() -> void:
 		remote_transform.remote_path = camera_node.get_path()
 		camera_slot.add_child(remote_transform)
 
+
 func prepare_teams() -> void:
 	for i in range(len(teams)):
 		teams[i].spawn_position = get_node("../" + current_map + "/SpawnPoint" + str(i)).global_position
@@ -101,6 +102,7 @@ func respawn_bag() -> void:
 	new_money_bag.is_picked_up = false
 	money_bag = new_money_bag
 	drop_bag()
+
 
 func drop_bag():
 	carrier_player_id = -1
