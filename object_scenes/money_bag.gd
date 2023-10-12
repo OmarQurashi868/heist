@@ -1,16 +1,15 @@
 extends Area3D
 
 @onready var game_manager: Node3D = $"../GameManager"
-var is_picked_up = false
 @export var amp = 0.5
 @export var freq = 0.5
 @export var speed = 6
 signal money_bag_picked_up(team)
+var is_picked_up = false
 var carrier: CharacterBody3D
 var angle = 0
-var cooldown_finished = false
 var money_bag_void_pos = Vector3(999, 999, 999)
-var base_touced = false
+
 
 # Called when the node enters the scene tree for the first time.
 func _physics_process(delta):
@@ -35,15 +34,10 @@ func _on_body_entered(body):
 		
 
 func on_bag_drop():
-	base_touced = true
 	is_picked_up = false
 	global_position = money_bag_void_pos
-	
+	$bag_respawn_time.start()
 
 
 func _on_bag_respawn_time_timeout():
-	if base_touced:
-		game_manager.respawn_bag()
-		cooldown_finished = true
-		print("hello")
-		base_touced = false
+	game_manager.respawn_bag()

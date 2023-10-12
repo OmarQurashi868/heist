@@ -22,7 +22,7 @@ class Team:
 @onready var money_bag_scene: PackedScene = preload("res://object_scenes/money_bag.tscn")
 @onready var score_label_path: String = "../HBoxContainer/ScoreLabel"
 @export var player_scene: PackedScene = preload("res://object_scenes/player.tscn")
-@export_range(1,4) var players_num = 4
+@export_range(2,8) var players_num = 4
 @export var current_map = "LevelTest"
 
 var carrier_player_id = -1
@@ -38,6 +38,20 @@ var teams: Array[Team] = [
 func _ready():
 	prepare_teams()
 	spawn_players()
+	get_tree().root.size_changed.connect(on_viewport_size_changed)
+	on_viewport_size_changed()
+
+
+func on_viewport_size_changed():
+	var current_resolution = DisplayServer.window_get_size()
+	var viewport_containers = get_tree().get_nodes_in_group("subviewportcontainer")
+	var resolution_x = current_resolution.x / 2.0
+	var resolution_y = current_resolution.y / ceil(players_num / 2.0)
+	var resolution_per_player = Vector2(resolution_x, resolution_y)
+	print(resolution_per_player)
+	
+	for container in viewport_containers:
+		container.get_node("SubViewport").size = resolution_per_player
 
 
 func spawn_players() -> void:
@@ -82,7 +96,6 @@ func grab_bag(player_id, team_name) -> void:
 	var team = get_team_by_name(team_name)
 	carrier_player_id = player_id
 	team.has_money = true
-	#print(carrier_player_id)
 
 
 func touch_base(player_id, team_id) -> void:
@@ -97,7 +110,6 @@ func touch_base(player_id, team_id) -> void:
 func respawn_bag() -> void:
 	var money_bag_spawn_pos = get_node("../" + current_map + "/MoneyBagSpawn").global_position
 	money_bag.global_position = money_bag_spawn_pos
-
 
 
 func rename_money_bag(new_money_bag):
