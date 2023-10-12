@@ -32,6 +32,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="MoneyBag" parent="." instance=ExtResource("4_e1qbj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.63489, 0)
+amp = 0.5
+freq = 0.5
+speed = 6
 
 [node name="GridContainer" type="GridContainer" parent="."]
 offset_right = 1280.0
