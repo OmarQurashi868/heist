@@ -22,7 +22,6 @@ tonemap_mode = 3
 
 [node name="GameManager" type="Node3D" parent="."]
 script = ExtResource("1_f05ku")
-players_num = 2
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_pij7h")
