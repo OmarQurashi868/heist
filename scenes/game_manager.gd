@@ -90,16 +90,14 @@ func touch_base(player_id, team_id) -> void:
 		teams[team_id].add_score()
 		var score_label = get_node(score_label_path + str(team_id))
 		score_label.text = str(teams[team_id].score)
-		respawn_bag.call_deferred()
+		money_bag.on_bag_drop()
+		drop_bag()
 
 
 func respawn_bag() -> void:
-	
-	
 	var money_bag_spawn_pos = get_node("../" + current_map + "/MoneyBagSpawn").global_position
 	money_bag.global_position = money_bag_spawn_pos
-	drop_bag()
-	
+
 
 
 func rename_money_bag(new_money_bag):
