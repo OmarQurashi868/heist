@@ -48,7 +48,6 @@ func on_viewport_size_changed():
 	var resolution_x = current_resolution.x / 2.0
 	var resolution_y = current_resolution.y / ceil(players_num / 2.0)
 	var resolution_per_player = Vector2(resolution_x, resolution_y)
-	print(resolution_per_player)
 	
 	for container in viewport_containers:
 		container.get_node("SubViewport").size = resolution_per_player

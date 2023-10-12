@@ -29,9 +29,8 @@ func _on_body_entered(body):
 		carrier = body
 		var carrier_team = body.get_groups()[1]
 		var player_id = body.player_id
-		#print(carrier)
 		emit_signal("money_bag_picked_up", player_id, carrier_team)
-		
+
 
 func on_bag_drop():
 	is_picked_up = false

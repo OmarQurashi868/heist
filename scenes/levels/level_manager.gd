@@ -30,4 +30,3 @@ func _on_base_yellow_body_entered(body):
 
 func _on_money_bag_picked_up(player_id, team):
 	game_manager.grab_bag(player_id, team)
-	print(player_id)
