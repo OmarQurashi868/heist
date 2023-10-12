@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 
 @export var player_id = 0
+@export var health = 10.0
 const SPEED = 8.0
 const JUMP_VELOCITY = 15.0
 const ROTATION_SPEED = 1.5
@@ -13,6 +14,8 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _physics_process(delta):
 	# Add the gravity.
+	if Input.is_action_just_pressed("ui_cancel"):
+		take_damage(Attack.new(10))
 	if not is_on_floor():
 		velocity.y -= gravity * delta * GRAVITY_FACTOR
 
@@ -31,3 +34,14 @@ func _physics_process(delta):
 	rotation.y += -rot_dir * delta * ROTATION_SPEED
 	
 	move_and_slide()
+
+
+func take_damage(attack: Attack):
+	health -= attack.damage
+	print(health)
+	if health <= 0:
+		die()
+	
+
+func die():
+	pass

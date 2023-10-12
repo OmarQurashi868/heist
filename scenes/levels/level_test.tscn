@@ -56,9 +56,6 @@ shape = SubResource("BoxShape3D_bielj")
 [node name="HeistMap" parent="." instance=ExtResource("3_t2qlr")]
 transform = Transform3D(0.765, 0, 0, 0, 0.765, 0, 0, 0, 0.765, 0, 0, 0)
 
-[node name="ground" parent="HeistMap" index="6"]
-visible = false
-
 [node name="SpawnPoint0" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.5, 55)
 
@@ -75,5 +72,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -55, 6.5, 0)
 [connection signal="body_entered" from="Base1" to="LevelManager" method="_on_base_blue_body_entered"]
 [connection signal="body_entered" from="Base2" to="LevelManager" method="_on_base_green_body_entered"]
 [connection signal="body_entered" from="Base3" to="LevelManager" method="_on_base_yellow_body_entered"]
-
-[editable path="HeistMap"]
