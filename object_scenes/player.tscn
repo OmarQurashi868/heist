@@ -13,7 +13,6 @@ material = SubResource("StandardMaterial3D_x0oqo")
 
 [node name="Player" type="CharacterBody3D" groups=["player"]]
 script = ExtResource("1_xk6m8")
-player_id = null
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_0tp6i")
