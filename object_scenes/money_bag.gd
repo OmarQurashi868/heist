@@ -18,9 +18,9 @@ func _physics_process(delta):
 		position.x = move_toward(position.x, slot.global_position.x, speed * delta)
 		position.y = move_toward(position.y, slot.global_position.y, speed * delta)
 		position.z = move_toward(position.z, slot.global_position.z, speed * delta)
-	#else:
-		#angle += 2 * 3.14 * delta
-		#position.y = sin(angle * freq) * amp + 2
+	else:
+		angle += 2 * 3.14 * delta
+		position.y = sin(angle * freq) * amp + 2
 
 
 func _on_body_entered(body):
