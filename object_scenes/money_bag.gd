@@ -3,7 +3,7 @@ extends Area3D
 @onready var game_manager: Node3D = $"../GameManager"
 @export var amp = 0.5
 @export var freq = 0.5
-@export var speed = 6
+@export var speed = 12
 signal money_bag_picked_up(team)
 var is_picked_up = false
 var carrier: CharacterBody3D
