@@ -57,6 +57,7 @@ func spawn_players() -> void:
 		var player = player_scene.instantiate()
 		player.name += str(i)
 		player.player_id = i
+		player.team_id = i
 		player.add_to_group(teams[i].name)
 		# This function needs to be called because all of it's calls need to happen at the end
 		parent_and_adjust.call_deferred(player, teams[i].spawn_position)
@@ -152,3 +153,11 @@ func get_player_by_id(player_id: int) -> CharacterBody3D:
 		if player.player_id == player_id:
 			return player
 	return null
+
+
+func respawn_player(player):
+	player.global_position = teams[player.team_id].spawn_position
+	# Rotate  camera to the center of the map
+	player.look_at(Vector3(0, player.position.y, 0))
+	player.is_dead = false
+	player.health = player.FULL_HEALTH
