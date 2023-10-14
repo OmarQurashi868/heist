@@ -1,5 +1,4 @@
 extends Node3D
-
 class Team:
 	var name: String
 	var color: Color
@@ -16,7 +15,6 @@ class Team:
 	
 	func add_score():
 		self.score += 1
-
 
 @onready var money_bag: Area3D = $"../MoneyBag"
 @onready var money_bag_scene: PackedScene = preload("res://object_scenes/money_bag.tscn")
@@ -95,6 +93,7 @@ func grab_bag(player_id, team_name) -> void:
 	var team = get_team_by_name(team_name)
 	carrier_player_id = player_id
 	team.has_money = true
+	print(team.name)
 
 
 func touch_base(player_id, team_id) -> void:
@@ -118,7 +117,9 @@ func rename_money_bag(new_money_bag):
 func drop_bag():
 	carrier_player_id = -1
 	var carrier_team = get_carrier_team()
-	carrier_team.has_money = false
+	if carrier_team:
+		carrier_team.has_money = false
+	money_bag.on_bag_drop()
 
 
 func parent_and_adjust(player: CharacterBody3D, team_spawn: Vector3) -> void:

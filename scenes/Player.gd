@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
 
+@onready var game_manager: Node3D = $"../GameManager"
 @export var player_id = 0
 @export var health = 10.0
 const SPEED = 8.0
@@ -8,6 +9,7 @@ const JUMP_VELOCITY = 15.0
 const ROTATION_SPEED = 1.5
 const GRAVITY_FACTOR = 4.0
 var has_money = false
+var is_stunned = false
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")	
@@ -15,7 +17,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 func _physics_process(delta):
 	# Add the gravity.
 	if Input.is_action_just_pressed("ui_cancel"):
-		take_damage(Attack.new(10))
+		take_damage(Attack.new(1))
 	if not is_on_floor():
 		velocity.y -= gravity * delta * GRAVITY_FACTOR
 
@@ -29,6 +31,8 @@ func _physics_process(delta):
 	var rot_dir = Input.get_axis("ui_left", "ui_right")
 	
 	var direction = Vector2.from_angle(rotation.y)
+	if is_stunned:
+		direction = Vector2.ZERO
 	velocity.x = move_toward(velocity.x, -direction.y * SPEED * move_dir, SPEED)
 	velocity.z = move_toward(velocity.z, -direction.x * SPEED * move_dir, SPEED)
 	rotation.y += -rot_dir * delta * ROTATION_SPEED
@@ -38,10 +42,12 @@ func _physics_process(delta):
 
 func take_damage(attack: Attack):
 	health -= attack.damage
-	print(health)
+	game_manager.drop_bag()
+	is_stunned = true
+	get_tree().create_timer(attack.stun_timer).timeout.connect(func(): is_stunned = false)
 	if health <= 0:
 		die()
 	
 
 func die():
-	pass
+	print("you're ded")
