@@ -3,9 +3,10 @@ extends Area3D
 @onready var game_manager: Node3D = $"../GameManager"
 @export var amp = 0.5
 @export var freq = 0.5
-@export var speed = 6
+@export var speed = 12
 signal money_bag_picked_up(team)
 var is_picked_up = false
+var is_cashed_in = false
 var carrier: CharacterBody3D
 var angle = 0
 var money_bag_void_pos = Vector3(999, 999, 999)
@@ -21,7 +22,7 @@ func _physics_process(delta):
 		position.x = move_toward(position.x, slot.global_position.x, speed * delta)
 		position.y = move_toward(position.y, slot.global_position.y, speed * delta)
 		position.z = move_toward(position.z, slot.global_position.z, speed * delta)
-	else:
+	elif not is_cashed_in:
 		angle += 2 * 3.14 * delta
 		var spawn_pos = get_node("../LevelTest/MoneyBagSpawn").global_position
 		position = lerp(position, spawn_pos, delta)
@@ -45,9 +46,11 @@ func on_bag_drop():
 func on_bag_cash_in():
 	is_picked_up = false
 	carrier = null
+	is_cashed_in = true
 	position = money_bag_void_pos
 	$bag_respawn_time.start()
 
 
 func _on_bag_respawn_time_timeout():
+	is_cashed_in = false
 	game_manager.respawn_bag()

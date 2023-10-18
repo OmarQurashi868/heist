@@ -2,10 +2,12 @@ extends CharacterBody3D
 class_name Player
 
 @onready var game_manager: Node3D = $"../GameManager"
+@onready var anim: AnimationPlayer = $AnimationPlayer
 var player_id = 0
 var team_id
 const FULL_HEALTH = 10.0
 @export var health = 10.0
+@export var weapon: Weapon
 const RESPAWN_TIMER = 1
 const SPEED = 8.0
 const JUMP_VELOCITY = 15.0
@@ -18,11 +20,16 @@ var is_dead = false
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+func _ready():
+	weapon = $WeaponBat
+	weapon.weapon_owner = self
+
 func _physics_process(delta):
 	# Add the gravity.
-	if Input.is_action_just_pressed("ui_cancel"):
-		take_damage(Attack.new(5))
-	
+	if Input.is_action_just_pressed("attack"):
+		weapon.start_attack()
+		anim.play("attack_melee")
+		
 	if not is_on_floor():
 		velocity.y -= gravity * delta * GRAVITY_FACTOR
 
@@ -47,10 +54,10 @@ func _physics_process(delta):
 
 
 func take_damage(attack: Attack):
-	print("hello")
 	if not is_dead and not is_stunned:
 		health -= attack.damage
 		game_manager.drop_bag()
+		velocity = (attack.knockback_source - position) * attack.knockback_force
 		is_stunned = true
 		get_tree().create_timer(attack.stun_timer).timeout.connect(func(): is_stunned = false)
 		if health <= 0:

@@ -94,7 +94,6 @@ func grab_bag(player_id, team_name) -> void:
 	var team = get_team_by_name(team_name)
 	carrier_player_id = player_id
 	team.has_money = true
-	print(team.name)
 
 
 func touch_base(player_id, team_id) -> void:
@@ -102,8 +101,8 @@ func touch_base(player_id, team_id) -> void:
 		teams[team_id].add_score()
 		var score_label = get_node(score_label_path + str(team_id))
 		score_label.text = str(teams[team_id].score)
-		money_bag.on_bag_drop()
 		drop_bag()
+		money_bag.on_bag_cash_in()
 
 
 func respawn_bag() -> void:
