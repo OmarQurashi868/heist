@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://cdgxv262iowag"]
+
+[ext_resource type="Script" path="res://weapons/WeaponBat.gd" id="1_a6ujx"]
+[ext_resource type="PackedScene" uid="uid://c72pxflkdjg4l" path="res://assets/blender/bonk_bat.blend" id="2_3wng3"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_7hgi5"]
+radius = 0.845
+height = 6.80543
+
+[node name="WeaponBat" type="Node3D"]
+transform = Transform3D(0.205, 0, 0, 0, 0.205, 0, 0, 0, 0.205, 0, 3.0697, 0)
+script = ExtResource("1_a6ujx")
+
+[node name="bonk_bat" parent="." instance=ExtResource("2_3wng3")]
+transform = Transform3D(0.53, 0, 0, 0, 0.53, 0, 0, 0, 0.53, 0, 0, 0)
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1.095, 0, 0, 0, 1.095, 0, 0, 0, 1.095, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_7hgi5")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

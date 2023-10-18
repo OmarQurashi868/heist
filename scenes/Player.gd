@@ -1,5 +1,5 @@
 extends CharacterBody3D
-
+class_name Player
 
 @onready var game_manager: Node3D = $"../GameManager"
 var player_id = 0
@@ -47,6 +47,7 @@ func _physics_process(delta):
 
 
 func take_damage(attack: Attack):
+	print("hello")
 	if not is_dead and not is_stunned:
 		health -= attack.damage
 		game_manager.drop_bag()

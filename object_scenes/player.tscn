@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://damma4k485jxg"]
+[gd_scene load_steps=7 format=3 uid="uid://damma4k485jxg"]
 
 [ext_resource type="Script" path="res://scenes/Player.gd" id="1_xk6m8"]
 [ext_resource type="PackedScene" uid="uid://kyk47i158d1a" path="res://object_scenes/money_bag_slot.tscn" id="2_wec5w"]
+[ext_resource type="PackedScene" uid="uid://cdgxv262iowag" path="res://weapons/WeaponBat.tscn" id="3_e2uvj"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0tp6i"]
 
@@ -28,3 +29,6 @@ transform = Transform3D(0.999808, 0.0196162, -4.53129e-09, -0.0194886, 0.993305,
 mesh = SubResource("CapsuleMesh_swqqn")
 
 [node name="MoneyBagSlot" parent="." instance=ExtResource("2_wec5w")]
+
+[node name="WeaponBat" parent="." instance=ExtResource("3_e2uvj")]
+transform = Transform3D(0.138855, 0.116732, -0.0954875, -0.051573, 0.158725, 0.119044, 0.14172, -0.0566111, 0.136878, 0.789679, 0.152643, -0.147269)
