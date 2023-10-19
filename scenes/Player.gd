@@ -57,7 +57,7 @@ func take_damage(attack: Attack):
 	if not is_dead and not is_stunned:
 		health -= attack.damage
 		game_manager.drop_bag()
-		velocity = (attack.knockback_source - position) * attack.knockback_force
+		velocity = (position - attack.knockback_source) * attack.knockback_force
 		is_stunned = true
 		get_tree().create_timer(attack.stun_timer).timeout.connect(func(): is_stunned = false)
 		if health <= 0:
