@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqb1q5rwjj2fp"]
+
+[ext_resource type="Script" path="res://weapons/WeaponGun.gd" id="1_5eomi"]
+[ext_resource type="PackedScene" uid="uid://c3607c6xky66b" path="res://assets/blender/gun.blend" id="2_1fgck"]
+
+[node name="WeaponGun" type="Node3D"]
+script = ExtResource("1_5eomi")
+
+[node name="gun" parent="." instance=ExtResource("2_1fgck")]
+transform = Transform3D(0.275, 0, 0, 0, 0.275, 0, 0, 0, 0.275, 0, 0, 0)

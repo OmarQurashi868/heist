@@ -21,7 +21,7 @@ var is_dead = false
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _ready():
-	weapon = $GreatSword
+	weapon = $WeaponGun
 	weapon.weapon_owner = self
 
 func _physics_process(delta):
@@ -69,3 +69,6 @@ func die():
 	velocity = Vector3.ZERO
 	is_dead = true
 	get_tree().create_timer(RESPAWN_TIMER).timeout.connect(func(): game_manager.respawn_player(self))
+
+func stop_attack():
+	weapon.stop_attack()
