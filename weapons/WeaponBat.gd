@@ -1,10 +1,9 @@
 extends Weapon
 
 func _ready():
+	super()
 	weapon_name = "WeaponBat"
 	weapon_tier = 0
 	weapon_attack = weapon_data.bat_attack
+	#weapon_type = WEAPON_TYPES.MELEE
 
-func _on_area_3d_body_entered(body):
-	if body.is_in_group("player"):
-		try_deal_damage(body)

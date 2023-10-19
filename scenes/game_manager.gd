@@ -94,6 +94,8 @@ func grab_bag(player_id, team_name) -> void:
 	var team = get_team_by_name(team_name)
 	carrier_player_id = player_id
 	team.has_money = true
+	var carrier = get_player_by_id(player_id)
+	carrier.has_money = true
 
 
 func touch_base(player_id, team_id) -> void:

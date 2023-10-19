@@ -6,9 +6,16 @@ var weapon_tier: int
 var weapon_attack: Attack
 var weapon_owner: Player
 var weapon_data: WeaponData = preload("res://resources/weapon_data.tres")
-enum weapon_type {MELEE, HITSCAN, PROJECTILE}
-
+enum WEAPON_TYPES {MELEE, HITSCAN, PROJECTILE}
+var weapon_type: WEAPON_TYPES
+@onready var hitbox: Area3D = $Area3D
 var is_attacking = false
+
+
+
+func _ready():
+	if weapon_type == WEAPON_TYPES.MELEE:
+		hitbox.body_entered.connect(hitbox_touched)
 
 #func _init(given_name: String, given_tier: int, given_attack: Attack):
 	#print("weapon ready")
@@ -29,3 +36,8 @@ func start_attack():
 
 func stop_attack():
 	is_attacking = false
+	
+
+func hitbox_touched(body):
+	if body.is_in_group("player"):
+		try_deal_damage(body)

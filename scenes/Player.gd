@@ -21,7 +21,7 @@ var is_dead = false
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _ready():
-	weapon = $WeaponBat
+	weapon = $GreatSword
 	weapon.weapon_owner = self
 
 func _physics_process(delta):
@@ -55,8 +55,9 @@ func _physics_process(delta):
 
 func take_damage(attack: Attack):
 	if not is_dead and not is_stunned:
+		if has_money:
+			game_manager.drop_bag()
 		health -= attack.damage
-		game_manager.drop_bag()
 		velocity = (position - attack.knockback_source) * attack.knockback_force
 		is_stunned = true
 		get_tree().create_timer(attack.stun_timer).timeout.connect(func(): is_stunned = false)
