@@ -2,6 +2,25 @@
 
 [node name="SubViewportContainer" type="SubViewportContainer" groups=["subviewportcontainer"]]
 
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = 296.0
+offset_right = 64.0
+offset_bottom = 360.0
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+max_value = 10.0
+step = 0.1
+value = 10.0
+fill_mode = 3
+
 [node name="SubViewport" type="SubViewport" parent="."]
 handle_input_locally = false
 size = Vector2i(640, 360)
