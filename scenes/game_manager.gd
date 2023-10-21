@@ -1,4 +1,5 @@
 extends Node3D
+
 class Team:
 	var name: String
 	var color: Color
@@ -16,8 +17,6 @@ class Team:
 	func add_score():
 		self.score += 1
 
-signal scene_loaded
-
 @onready var money_bag: Area3D = $"../MoneyBag"
 @onready var money_bag_scene: PackedScene = preload("res://object_scenes/money_bag.tscn")
 @onready var grid_container: GridContainer = $"../GridContainer"
@@ -25,8 +24,8 @@ signal scene_loaded
 @onready var score_label_path: String = "../HBoxContainer/ScoreLabel"
 @export var player_scene: PackedScene = preload("res://object_scenes/player.tscn")
 #@export_range(2,8) var local_players_num = 4
-var level_scene_path = LobbyManager.current_map_path
 
+var level_scene_path = LobbyManager.current_map_path
 var carrier_player_id = -1
 
 var teams: Array[Team] = [
@@ -38,9 +37,13 @@ var teams: Array[Team] = [
 
 
 func _ready():
+	initialize_game.call_deferred()
+
+
+func initialize_game():
 	var level_scene = load(level_scene_path)
 	var level = level_scene.instantiate()
-	add_child.call_deferred(level)
+	$"..".add_child(level)
 	prepare_teams()
 	get_tree().root.size_changed.connect(on_viewport_size_changed)
 	if LobbyManager.local_players_num == 1:
@@ -52,7 +55,6 @@ func _ready():
 	for i in range(LobbyManager.local_players_num):
 		spawn_player(i, i % 4)
 	on_viewport_size_changed()
-	scene_loaded.emit()
 
 func on_viewport_size_changed():
 	var current_resolution = DisplayServer.window_get_size()

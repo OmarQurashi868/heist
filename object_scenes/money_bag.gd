@@ -13,7 +13,7 @@ var money_bag_void_pos = Vector3(999, 999, 999)
 
 
 func _ready():
-	game_manager.respawn_bag()
+	game_manager.respawn_bag.call_deferred()
 
 # Called when the node enters the scene tree for the first time.
 func _physics_process(delta):

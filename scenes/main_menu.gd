@@ -6,6 +6,7 @@ class Level:
 	var lvl_id: int
 
 @onready var game_scene_path = "res://scenes/game.tscn"
+@onready var menu_container = get_node("MarginContainer/MenuSeperator")
 enum MENUES {LOCAL, ONLINE, OPTIONS}
 var levels_path = "res://scenes/levels"
 var levels: Array[Level]
@@ -13,26 +14,28 @@ var open_menu: MENUES
 
 
 func _ready():
-	print(snake_to_pascal("level_test"))
 	levels = get_all_levels()
 	for level in levels:
-		$MenuSeperator/LocalButtons/LevelOption.add_item(level.lvl_name, level.lvl_id)
-	LobbyManager.local_players_num = $MenuSeperator/LocalButtons/PlayersNumOption.selected + 2
-	
+		menu_container.get_node("LocalButtons/LevelOption").add_item(level.lvl_name, level.lvl_id)
+	LobbyManager.local_players_num = menu_container.get_node("LocalButtons/PlayersNumOption").selected + 2
+	LobbyManager.on_loading_end()
 
 
 func start_game():
-	get_tree().change_scene_to_file(game_scene_path)
+	LobbyManager.swap_scene(self, game_scene_path)
+	#LobbyManager.on_loading_start()
+	#get_tree().change_scene_to_file(game_scene_path)
 
 
 func switch_menu(new_menu: MENUES):
-	$MenuSeperator/LocalButtons.hide()
+	menu_container.get_node("LocalButtons").hide()
+	menu_container.get_node("OnlineButtons").hide()
 	
 	match new_menu:
 		MENUES.LOCAL:
-			$MenuSeperator/LocalButtons.show()
+			menu_container.get_node("LocalButtons").show()
 		MENUES.ONLINE:
-			pass
+			menu_container.get_node("OnlineButtons").show()
 		MENUES.OPTIONS:
 			pass
 
@@ -52,8 +55,9 @@ func get_all_levels() -> Array[Level]:
 			file_name = dir.get_next()
 	return levels
 
+
 func _on_exit_button_button_up():
-	get_tree().quit()
+	$QuitConfirmationDialog.show()
 
 
 func _on_players_num_option_item_selected(index):
@@ -68,9 +72,18 @@ func _on_play_local_menu_button_button_up():
 	switch_menu(MENUES.LOCAL)
 
 
+func _on_play_online_menu_button_button_up():
+	switch_menu(MENUES.ONLINE)
+
+
+
 func _on_level_option_item_selected(index):
 	LobbyManager.current_map = snake_to_pascal(levels[index].lvl_name)
-	LobbyManager.current_map_path = levels[index].lvl_path
+	LobbyManager.current_map_path = levels[index].lvl_path + "/" + levels[index].lvl_name
+
+
+func _on_quit_confirmation_dialog_confirmed():
+	get_tree().quit()
 
 
 func snake_to_pascal(input: String) -> String:
@@ -81,3 +94,5 @@ func snake_to_pascal(input: String) -> String:
 			pascal [i + 1] = pascal[i + 1].to_upper()
 	pascal = pascal.replace("_", "")
 	return pascal
+
+

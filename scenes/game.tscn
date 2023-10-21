@@ -1,7 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://dqgh0ag1pa1br"]
+[gd_scene load_steps=6 format=3 uid="uid://dqgh0ag1pa1br"]
 
 [ext_resource type="Script" path="res://scenes/game_manager.gd" id="1_f05ku"]
-[ext_resource type="PackedScene" uid="uid://b2de8c80dj8ho" path="res://scenes/levels/level_test.tscn" id="2_autob"]
 [ext_resource type="PackedScene" uid="uid://r7w2hg7uhym4" path="res://object_scenes/money_bag.tscn" id="4_e1qbj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4b2yv"]
@@ -25,9 +24,6 @@ script = ExtResource("1_f05ku")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_pij7h")
-
-[node name="LevelTest" parent="." instance=ExtResource("2_autob")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="MoneyBag" parent="." instance=ExtResource("4_e1qbj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.63489, 0)
