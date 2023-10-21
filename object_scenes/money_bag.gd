@@ -13,7 +13,9 @@ var money_bag_void_pos = Vector3(999, 999, 999)
 
 
 func _ready():
-	game_manager.respawn_bag.call_deferred()
+	#position = money_bag_void_pos
+	#game_manager.respawn_bag.call_deferred()
+	pass
 
 # Called when the node enters the scene tree for the first time.
 func _physics_process(delta):
@@ -25,8 +27,9 @@ func _physics_process(delta):
 	elif not is_cashed_in:
 		angle += 2 * 3.14 * delta
 		var spawn_pos = get_node("../LevelTest/MoneyBagSpawn").global_position
-		position = lerp(position, spawn_pos, delta)
-		position.y = sin(angle * freq) * amp + 2
+		position.x = move_toward(position.x, spawn_pos.x, delta)
+		position.z = move_toward(position.z, spawn_pos.z, delta)
+		position.y = spawn_pos.y + sin(angle * freq) * amp
 
 
 func _on_body_entered(body):
