@@ -144,7 +144,7 @@ script = ExtResource("1_xk6m8")
 shape = SubResource("CapsuleShape3D_0tp6i")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.999816, 0.0191975, 0, -0.0184903, 0.962986, 0.26892, 0.00516257, -0.26887, 0.963162, 0, 1.47821, 3.81411)
+transform = Transform3D(0.999816, 0.0191975, 0, -0.0184992, 0.963454, 0.267238, 0.0051303, -0.267189, 0.96363, 0, 1.47821, 3.81411)
 current = true
 
 [node name="CameraSlot" type="Node3D" parent="."]
