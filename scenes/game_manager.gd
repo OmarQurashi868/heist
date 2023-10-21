@@ -16,6 +16,7 @@ class Team:
 	func add_score():
 		self.score += 1
 
+signal scene_loaded
 
 @onready var money_bag: Area3D = $"../MoneyBag"
 @onready var money_bag_scene: PackedScene = preload("res://object_scenes/money_bag.tscn")
@@ -23,8 +24,8 @@ class Team:
 @onready var sub_viewport_container: PackedScene = preload("res://object_scenes/sub_viewport_container.tscn")
 @onready var score_label_path: String = "../HBoxContainer/ScoreLabel"
 @export var player_scene: PackedScene = preload("res://object_scenes/player.tscn")
-@export_range(2,8) var local_players_num = 4
-@export var current_map = LobbyManager.current_map
+#@export_range(2,8) var local_players_num = 4
+var level_scene_path = LobbyManager.current_map_path
 
 var carrier_player_id = -1
 
@@ -37,31 +38,34 @@ var teams: Array[Team] = [
 
 
 func _ready():
+	var level_scene = load(level_scene_path)
+	var level = level_scene.instantiate()
+	add_child.call_deferred(level)
 	prepare_teams()
 	get_tree().root.size_changed.connect(on_viewport_size_changed)
-	if local_players_num == 1:
+	if LobbyManager.local_players_num == 1:
 		grid_container.columns = 1
-	elif local_players_num == 2:
+	elif LobbyManager.local_players_num == 2:
 		grid_container.columns = 2
 	else:
-		grid_container.columns = ceil(local_players_num / 2.0)
-	for i in range(local_players_num):
+		grid_container.columns = ceil(LobbyManager.local_players_num / 2.0)
+	for i in range(LobbyManager.local_players_num):
 		spawn_player(i, i % 4)
 	on_viewport_size_changed()
-
+	scene_loaded.emit()
 
 func on_viewport_size_changed():
 	var current_resolution = DisplayServer.window_get_size()
 	var viewport_containers = get_tree().get_nodes_in_group("subviewportcontainer")
 	# Calculate subviewport resolution
 	var player_resolution = Vector2.ZERO
-	if local_players_num == 1:
+	if LobbyManager.local_players_num == 1:
 		player_resolution = current_resolution
-	elif local_players_num == 2:
+	elif LobbyManager.local_players_num == 2:
 		player_resolution.x = current_resolution.x / 2.0
-		player_resolution.y = current_resolution.y / ceil(local_players_num / 2.0)
+		player_resolution.y = current_resolution.y / ceil(LobbyManager.local_players_num / 2.0)
 	else:
-		player_resolution.x = current_resolution.x / ceil(local_players_num / 2.0)
+		player_resolution.x = current_resolution.x / ceil(LobbyManager.local_players_num / 2.0)
 		player_resolution.y = current_resolution.y / 2.0
 	var resolution_per_player = player_resolution
 	
@@ -109,7 +113,7 @@ func spawn_player(player_id: int, team_id: int) -> void:
 
 func prepare_teams() -> void:
 	for i in range(len(teams)):
-		teams[i].spawn_position = get_node("../" + current_map + "/SpawnPoint" + str(i)).global_position
+		teams[i].spawn_position = get_node("../" + LobbyManager.current_map + "/SpawnPoint" + str(i)).global_position
 
 
 func grab_bag(player_id, team_name) -> void:
@@ -130,7 +134,7 @@ func touch_base(player_id, team_id) -> void:
 
 
 func respawn_bag() -> void:
-	var money_bag_spawn_pos = get_node("../" + current_map + "/MoneyBagSpawn").global_position
+	var money_bag_spawn_pos = get_node("../" + LobbyManager.current_map + "/MoneyBagSpawn").global_position
 	money_bag.global_position = money_bag_spawn_pos
 
 

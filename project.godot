@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 LobbyManager="*res://classes/lobby_manager.gd"
 
+[debug]
+
+gdscript/warnings/unused_variable=0
+
 [display]
 
 window/size/viewport_width=1280
