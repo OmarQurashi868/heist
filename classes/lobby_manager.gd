@@ -8,6 +8,7 @@ var current_root_node: Window
 var is_local_game = true
 var local_players_num = 1
 var load_progress: Array = [0.0]
+var fake_progress: float = 0.0
 
 var players: Dictionary = {}
 
@@ -16,15 +17,20 @@ func _ready():
 	on_loading_start()
 
 
-func _process(_delta):
+func _process(delta):
 	if ResourceLoader.load_threaded_get_status(requested_scene_path, load_progress)\
 		== ResourceLoader.THREAD_LOAD_IN_PROGRESS:
-			LoadingScreen.get_node("Panel/Panel/VBoxContainer/ProgressBar").value = load_progress[0] * 100
+			if load_progress[0] > fake_progress:
+				fake_progress = load_progress[0]
+			LoadingScreen.get_node("Panel/Panel/VBoxContainer/ProgressBar").value = fake_progress * 100
 	elif ResourceLoader.load_threaded_get_status(requested_scene_path)\
 		== ResourceLoader.THREAD_LOAD_LOADED:
-			requested_scene = ResourceLoader.load_threaded_get(requested_scene_path).instantiate()
-			current_root_node.add_child.call_deferred(requested_scene)
-			requested_scene.ready.connect(on_loading_end)
+			fake_progress = move_toward(fake_progress, 1.0, delta * 1.5)
+			LoadingScreen.get_node("Panel/Panel/VBoxContainer/ProgressBar").value = fake_progress * 100
+			if fake_progress == 1.0:
+				requested_scene = ResourceLoader.load_threaded_get(requested_scene_path).instantiate()
+				current_root_node.add_child.call_deferred(requested_scene)
+				requested_scene.ready.connect(on_loading_end)
 
 
 func swap_scene(current_scene: Node, new_scene_path):
