@@ -16,7 +16,6 @@ size = Vector3(2, 15, 25)
 size = Vector3(2, 15, 25)
 
 [node name="LevelTest" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.725107, -0.927549, 0.340236)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 48.7505, 0)
