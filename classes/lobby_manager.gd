@@ -18,11 +18,13 @@ func _ready():
 
 
 func _process(delta):
+	# Check if a level is loading
 	if ResourceLoader.load_threaded_get_status(requested_scene_path, load_progress)\
 		== ResourceLoader.THREAD_LOAD_IN_PROGRESS:
 			if load_progress[0] > fake_progress:
 				fake_progress = load_progress[0]
 			LoadingScreen.get_node("Panel/Panel/VBoxContainer/ProgressBar").value = fake_progress * 100
+	# Check if level has finished loading
 	elif ResourceLoader.load_threaded_get_status(requested_scene_path)\
 		== ResourceLoader.THREAD_LOAD_LOADED:
 			fake_progress = move_toward(fake_progress, 1.0, delta * 1.5)
@@ -36,6 +38,8 @@ func _process(delta):
 func swap_scene(current_scene: Node, new_scene_path):
 	on_loading_start()
 	requested_scene_path = new_scene_path
+	
+	# Request background loading of new scene
 	ResourceLoader.load_threaded_request(requested_scene_path)
 	
 	current_root_node = current_scene.get_parent()
