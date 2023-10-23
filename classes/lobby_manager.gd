@@ -20,7 +20,6 @@ func _process(_delta):
 	if ResourceLoader.load_threaded_get_status(requested_scene_path, load_progress)\
 		== ResourceLoader.THREAD_LOAD_IN_PROGRESS:
 			LoadingScreen.get_node("Panel/Panel/VBoxContainer/ProgressBar").value = load_progress[0] * 100
-			print(load_progress)
 	elif ResourceLoader.load_threaded_get_status(requested_scene_path)\
 		== ResourceLoader.THREAD_LOAD_LOADED:
 			requested_scene = ResourceLoader.load_threaded_get(requested_scene_path).instantiate()
