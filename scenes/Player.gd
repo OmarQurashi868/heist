@@ -29,7 +29,8 @@ func _physics_process(delta):
 	# Add the gravity.
 	if Input.is_action_just_pressed("attack"):
 		weapon.start_attack()
-		anim.play("pistolshoot")
+		# TODO
+		#anim.play("pistolshoot")
 		
 	if not is_on_floor():
 		velocity.y -= gravity * delta * GRAVITY_FACTOR

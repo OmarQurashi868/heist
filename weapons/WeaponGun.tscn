@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://weapons/WeaponGun.gd" id="1_5eomi"]
 [ext_resource type="PackedScene" uid="uid://c3607c6xky66b" path="res://assets/blender/gun.blend" id="2_1fgck"]
-[ext_resource type="Texture2D" uid="uid://dcuwknhlj2ybm" path="res://addons/FPSTest Assets/Images/muzzle_flash_fire.png" id="3_upnxe"]
+[ext_resource type="Texture2D" uid="uid://dcuwknhlj2ybm" path="res://assets/textures/muzzle_flash_fire.png" id="3_gtpau"]
 [ext_resource type="AudioStream" uid="uid://ct2o0g56ewwaq" path="res://assets/audios/gunshot.mp3" id="4_tkhpj"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_b55e6"]
@@ -13,7 +13,7 @@ angle_max = 360.0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t0o2v"]
 transparency = 4
 blend_mode = 1
-albedo_texture = ExtResource("3_upnxe")
+albedo_texture = ExtResource("3_gtpau")
 emission_enabled = true
 emission = Color(0.913725, 0.282353, 0, 1)
 emission_energy_multiplier = 0.78
