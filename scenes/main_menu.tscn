@@ -1,0 +1,117 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpqrftd8msfug"]
+
+[ext_resource type="Script" path="res://scenes/main_menu.gd" id="1_kevnn"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kevnn")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+offset_right = 288.0
+offset_bottom = 720.0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_right = 16
+
+[node name="MenuSeperator" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="MainButtons" type="VBoxContainer" parent="MarginContainer/MenuSeperator"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="PlayLocalMenuButton" type="Button" parent="MarginContainer/MenuSeperator/MainButtons"]
+layout_mode = 2
+text = "PLAY LOCAL"
+
+[node name="PlayOnlineMenuButton" type="Button" parent="MarginContainer/MenuSeperator/MainButtons"]
+layout_mode = 2
+tooltip_text = "Coming soon..."
+disabled = true
+text = "PLAY ONLINE"
+
+[node name="ExitButton" type="Button" parent="MarginContainer/MenuSeperator/MainButtons"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "QUIT"
+
+[node name="LocalButtons" type="VBoxContainer" parent="MarginContainer/MenuSeperator"]
+visible = false
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="PlayersNumLabel" type="Label" parent="MarginContainer/MenuSeperator/LocalButtons"]
+layout_mode = 2
+text = "# OF PLAYERS"
+
+[node name="PlayersNumOption" type="OptionButton" parent="MarginContainer/MenuSeperator/LocalButtons"]
+layout_mode = 2
+item_count = 7
+selected = 2
+popup/item_0/text = "2"
+popup/item_0/id = 0
+popup/item_1/text = "3"
+popup/item_1/id = 1
+popup/item_2/text = "4"
+popup/item_2/id = 2
+popup/item_3/text = "5"
+popup/item_3/id = 3
+popup/item_4/text = "6"
+popup/item_4/id = 4
+popup/item_5/text = "7"
+popup/item_5/id = 5
+popup/item_6/text = "8"
+popup/item_6/id = 6
+
+[node name="LevelLabel" type="Label" parent="MarginContainer/MenuSeperator/LocalButtons"]
+layout_mode = 2
+text = "LEVEL"
+
+[node name="LevelOption" type="OptionButton" parent="MarginContainer/MenuSeperator/LocalButtons"]
+layout_mode = 2
+fit_to_longest_item = false
+
+[node name="PlayLocalButton" type="Button" parent="MarginContainer/MenuSeperator/LocalButtons"]
+layout_mode = 2
+text = "START"
+
+[node name="OnlineButtons" type="VBoxContainer" parent="MarginContainer/MenuSeperator"]
+visible = false
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="ComingSoon" type="Label" parent="MarginContainer/MenuSeperator/OnlineButtons"]
+layout_mode = 2
+text = "COMING SOON..."
+
+[node name="QuitConfirmationDialog" type="ConfirmationDialog" parent="."]
+title = "QUIT?"
+initial_position = 1
+size = Vector2i(252, 100)
+unresizable = true
+borderless = true
+ok_button_text = "QUIT"
+dialog_text = "Are you sure you want to quit?"
+cancel_button_text = "CANCEL"
+
+[connection signal="button_up" from="MarginContainer/MenuSeperator/MainButtons/PlayLocalMenuButton" to="." method="_on_play_local_menu_button_button_up"]
+[connection signal="button_up" from="MarginContainer/MenuSeperator/MainButtons/PlayOnlineMenuButton" to="." method="_on_play_online_menu_button_button_up"]
+[connection signal="button_up" from="MarginContainer/MenuSeperator/MainButtons/ExitButton" to="." method="_on_exit_button_button_up"]
+[connection signal="item_selected" from="MarginContainer/MenuSeperator/LocalButtons/PlayersNumOption" to="." method="_on_players_num_option_item_selected"]
+[connection signal="item_selected" from="MarginContainer/MenuSeperator/LocalButtons/LevelOption" to="." method="_on_level_option_item_selected"]
+[connection signal="button_up" from="MarginContainer/MenuSeperator/LocalButtons/PlayLocalButton" to="." method="_on_play_local_button_button_up"]
+[connection signal="confirmed" from="QuitConfirmationDialog" to="." method="_on_quit_confirmation_dialog_confirmed"]

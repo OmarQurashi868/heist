@@ -16,7 +16,6 @@ size = Vector3(2, 15, 25)
 size = Vector3(2, 15, 25)
 
 [node name="LevelTest" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.725107, -0.927549, 0.340236)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 48.7505, 0)
@@ -26,7 +25,7 @@ light_energy = 1.355
 script = ExtResource("1_j4ypp")
 
 [node name="MoneyBagSpawn" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.44642, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.53575, 0)
 
 [node name="Base0" type="Area3D" parent="." groups=["base", "red"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 65)
