@@ -3,6 +3,7 @@ class_name Player
 
 @onready var game_manager: Node3D = $"../GameManager"
 @onready var anim: AnimationPlayer = $AnimationPlayer
+@onready var aimray = $AimRay
 var player_id = 0
 var team_id
 const FULL_HEALTH = 10.0
@@ -28,7 +29,8 @@ func _physics_process(delta):
 	# Add the gravity.
 	if Input.is_action_just_pressed("attack"):
 		weapon.start_attack()
-		anim.play("attack_melee")
+		# TODO
+		#anim.play("pistolshoot")
 		
 	if not is_on_floor():
 		velocity.y -= gravity * delta * GRAVITY_FACTOR

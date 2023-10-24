@@ -41,6 +41,10 @@ func hitbox_touched(body):
 		try_deal_damage(body)
 
 func shoot_weapon():
-	var shooting_target = owner.get_node("RayCast3D").get_collider()
+	var shooting_target = owner.get_node("AimRay").get_collider()
+	$MuzzleFlash.emitting = true
+	$GunshotSFX.play()
 	if shooting_target and shooting_target.is_in_group("player"):
 		try_deal_damage(shooting_target)
+		
+
