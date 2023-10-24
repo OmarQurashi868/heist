@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://b2de8c80dj8ho"]
 
 [ext_resource type="Script" path="res://scenes/levels/level_manager.gd" id="1_j4ypp"]
-[ext_resource type="PackedScene" uid="uid://daelj74dp0uba" path="res://assets/blender/heist map.blend" id="3_t2qlr"]
+[ext_resource type="PackedScene" uid="uid://daelj74dp0uba" path="res://assets/models/heist map.blend" id="3_t2qlr"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_kaa4x"]
 size = Vector3(25, 15, 2)

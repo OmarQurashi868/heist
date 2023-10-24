@@ -10,6 +10,7 @@ enum WEAPON_TYPES {MELEE, HITSCAN, PROJECTILE}
 var weapon_type: WEAPON_TYPES
 @onready var hitbox: Area3D
 var is_attacking = false
+var is_active = true
 
 
 
@@ -27,10 +28,13 @@ func try_deal_damage(target: Player):
 		target.take_damage(weapon_attack)
 
 func start_attack():
-	is_attacking = true
-	weapon_attack.knockback_source = weapon_owner.position
-	if weapon_type == WEAPON_TYPES.HITSCAN:
-		shoot_weapon()
+	if is_active and not is_attacking:
+		is_attacking = true
+		weapon_attack.knockback_source = weapon_owner.position
+		if weapon_type == WEAPON_TYPES.HITSCAN:
+			shoot_weapon()
+		if $AttackSFX:
+			$AttackSFX.play()
 
 func stop_attack():
 	if weapon_type == WEAPON_TYPES.MELEE:
@@ -43,7 +47,6 @@ func hitbox_touched(body):
 func shoot_weapon():
 	var shooting_target = owner.get_node("AimRay").get_collider()
 	$MuzzleFlash.emitting = true
-	$GunshotSFX.play()
 	if shooting_target and shooting_target.is_in_group("player"):
 		try_deal_damage(shooting_target)
 		

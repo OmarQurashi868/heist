@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cg37bhrunv0hh"
+path="res://.godot/imported/placeholder background music.mp3-ac4e3db9e4a4fff9e340a3f26b628f59.mp3str"
+
+[deps]
+
+source_file="res://assets/audio/placeholder background music.mp3"
+dest_files=["res://.godot/imported/placeholder background music.mp3-ac4e3db9e4a4fff9e340a3f26b628f59.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4
