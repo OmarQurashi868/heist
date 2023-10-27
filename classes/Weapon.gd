@@ -59,6 +59,5 @@ func shoot_weapon():
 func start_cooldown():
 	can_attack = false
 	get_tree().create_timer(cooldown_duration).timeout.connect(func(): can_attack = true)
-	print(cooldown_duration)
 	
 
