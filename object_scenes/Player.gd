@@ -29,7 +29,6 @@ func _physics_process(delta):
 	# Add the gravity.
 	if Input.is_action_just_pressed("attack") and not is_dead and not is_stunned:
 		weapon.start_attack()
-		anim.play("attack_melee")
 		# TODO
 		
 	if not is_on_floor():
