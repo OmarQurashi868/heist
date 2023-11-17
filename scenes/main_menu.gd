@@ -16,9 +16,11 @@ var open_menu: MENUES
 func _ready():
 	levels = get_all_levels()
 	for level in levels:
-		menu_container.get_node("LocalButtons/LevelOption").add_item(level.lvl_name, level.lvl_id)
+		var level_name = snake_to_space(level.lvl_name)
+		menu_container.get_node("LocalButtons/LevelOption").add_item(level_name, level.lvl_id)
 	LobbyManager.local_players_num = menu_container.get_node("LocalButtons/PlayersNumOption").selected + 2
 	LobbyManager.on_loading_end()
+	_on_level_option_item_selected(0)
 
 
 func start_game():
@@ -46,10 +48,11 @@ func get_all_levels() -> Array[Level]:
 		dir.list_dir_begin()
 		var file_name = dir.get_next()
 		while file_name != "":
-			if file_name.ends_with(".tscn"):
+			file_name = file_name.trim_suffix(".remap")
+			if file_name.ends_with(".tscn") and not file_name.begins_with("."):
 				var new_level = Level.new()
-				new_level.lvl_name = file_name.replace(".tscn", "")
-				new_level.lvl_path = dir.get_current_dir() + file_name
+				new_level.lvl_name = file_name.trim_suffix(".tscn")
+				new_level.lvl_path = dir.get_current_dir() + "/" + file_name
 				new_level.lvl_id = levels.size()
 				levels.append(new_level)
 			file_name = dir.get_next()
@@ -79,7 +82,7 @@ func _on_play_online_menu_button_button_up():
 
 func _on_level_option_item_selected(index):
 	LobbyManager.current_map = snake_to_pascal(levels[index].lvl_name)
-	LobbyManager.current_map_path = levels[index].lvl_path + "/" + levels[index].lvl_name
+	LobbyManager.current_map_path = levels[index].lvl_path
 
 
 func _on_quit_confirmation_dialog_confirmed():
@@ -96,3 +99,11 @@ func snake_to_pascal(input: String) -> String:
 	return pascal
 
 
+func snake_to_space(input: String) -> String:
+	var space = input
+	space[0] = space[0].to_upper()
+	for i in range(space.length()):
+		if space[i] == "_":
+			space [i + 1] = space[i + 1].to_upper()
+	space = space.replace("_", " ")
+	return space

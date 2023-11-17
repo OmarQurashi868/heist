@@ -1,7 +1,7 @@
 extends Node
 
-var current_map: String = "LevelTest"
-var current_map_path: String = "res://scenes/levels/level_test.tscn"
+var current_map: String = ""
+var current_map_path: String = ""
 var requested_scene_path: String = ""
 var requested_scene: Node3D
 var current_root_node: Window
