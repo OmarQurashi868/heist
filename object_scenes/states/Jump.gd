@@ -2,8 +2,7 @@ extends State
 
 
 func on_enter():
-	# Play animation
-	pass
+	player.animation_player.play("fall")
 
 func phys_proc(delta):
 	player.handle_movement(delta)

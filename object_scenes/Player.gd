@@ -5,6 +5,7 @@ class_name Player
 @onready var anim: AnimationPlayer = $AnimationPlayer
 @onready var aimray = $AimRay
 @onready var state_machine = $StateMachine as StateMachine
+@onready var animation_player = $weasel/AnimationPlayer as AnimationPlayer
 
 var player_id = 0
 var team_id

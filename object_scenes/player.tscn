@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://damma4k485jxg"]
+[gd_scene load_steps=18 format=3 uid="uid://damma4k485jxg"]
 
 [ext_resource type="Script" path="res://object_scenes/Player.gd" id="1_xk6m8"]
 [ext_resource type="PackedScene" uid="uid://kyk47i158d1a" path="res://object_scenes/money_bag_slot.tscn" id="2_wec5w"]
@@ -9,9 +9,12 @@
 [ext_resource type="Script" path="res://object_scenes/states/StateMachine.gd" id="7_3h0ol"]
 [ext_resource type="Script" path="res://object_scenes/states/Base.gd" id="8_6ux7w"]
 [ext_resource type="Script" path="res://object_scenes/states/Jump.gd" id="10_05ubf"]
+[ext_resource type="PackedScene" uid="uid://qmt6up6k8cj0" path="res://assets/models/weasel.glb" id="11_8vno4"]
 [ext_resource type="Script" path="res://object_scenes/states/Fall.gd" id="11_nwpiy"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0tp6i"]
+radius = 0.463618
+height = 2.22805
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x0oqo"]
 albedo_color = Color(0.92549, 0.12549, 0, 1)
@@ -156,6 +159,7 @@ current = true
 transform = Transform3D(0.999808, 0.0196162, -4.53129e-09, -0.0194886, 0.993305, 0.113862, 0.00223354, -0.11384, 0.993497, 0, 1.47821, 3.81411)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
 mesh = SubResource("CapsuleMesh_swqqn")
 
 [node name="MoneyBagSlot" parent="." instance=ExtResource("2_wec5w")]
@@ -202,3 +206,6 @@ script = ExtResource("10_05ubf")
 
 [node name="Fall" type="Node" parent="StateMachine"]
 script = ExtResource("11_nwpiy")
+
+[node name="weasel" parent="." instance=ExtResource("11_8vno4")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -0.951465, 0)
