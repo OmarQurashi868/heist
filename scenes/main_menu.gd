@@ -79,7 +79,6 @@ func _on_play_online_menu_button_button_up():
 	switch_menu(MENUES.ONLINE)
 
 
-
 func _on_level_option_item_selected(index):
 	LobbyManager.current_map = snake_to_pascal(levels[index].lvl_name)
 	LobbyManager.current_map_path = levels[index].lvl_path
