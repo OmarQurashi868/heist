@@ -156,7 +156,7 @@ func parent_and_adjust(player: CharacterBody3D, team_spawn: Vector3) -> void:
 	# This was seperated because the second call needs to happen after the first one
 	# and the first one needs to be call_deffered
 	get_parent().add_child(player)
-	player.global_position = team_spawn + Vector3(randf() * 10, team_spawn.y, randf() * 10) 
+	player.global_position = team_spawn + Vector3(randf() * 5, team_spawn.y, randf() * 5) 
 	
 	# Rotate  camera to the center of the map
 	player.look_at(Vector3(0, player.position.y, 0))
