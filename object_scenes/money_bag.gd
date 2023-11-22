@@ -26,7 +26,7 @@ func _physics_process(delta):
 		position.z = move_toward(position.z, slot.global_position.z, speed * delta)
 	elif not is_cashed_in:
 		angle += 2 * 3.14 * delta
-		var spawn_pos = get_node("../LevelTest/MoneyBagSpawn").global_position
+		var spawn_pos = get_node("../" + LobbyManager.current_map + "/MoneyBagSpawn").global_position
 		position.x = move_toward(position.x, spawn_pos.x, delta)
 		position.z = move_toward(position.z, spawn_pos.z, delta)
 		position.y = spawn_pos.y + sin(angle * freq) * amp

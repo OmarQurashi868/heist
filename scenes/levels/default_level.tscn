@@ -1,0 +1,102 @@
+[gd_scene load_steps=7 format=3 uid="uid://vswclnmaig4o"]
+
+[ext_resource type="Script" path="res://scenes/levels/level_manager.gd" id="1_nltdy"]
+[ext_resource type="PackedScene" uid="uid://dhychqx7yfbc" path="res://assets/models/levels/default_level.glb" id="2_ktxh1"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kaa4x"]
+size = Vector3(25, 15, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nnjup"]
+size = Vector3(25, 15, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8fwug"]
+size = Vector3(2, 15, 25)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bielj"]
+size = Vector3(2, 15, 25)
+
+[node name="DefaultLevel" type="Node3D"]
+transform = Transform3D(1.06066, 0, 1.06066, 0, 1.5, 0, -1.06066, 0, 1.06066, 0, 0, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 48.7505, 0)
+light_energy = 1.355
+
+[node name="LevelManager" type="Node3D" parent="."]
+script = ExtResource("1_nltdy")
+
+[node name="MoneyBagSpawn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.07642, 0)
+
+[node name="Base0" type="Area3D" parent="." groups=["base", "red"]]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -45.9619, 6, 45.9619)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Base0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.188935, 0.10463, 0.248833)
+shape = SubResource("BoxShape3D_kaa4x")
+
+[node name="Base1" type="Area3D" parent="." groups=["base", "blue"]]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 45.9619, 6, -45.9619)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Base1"]
+shape = SubResource("BoxShape3D_nnjup")
+
+[node name="Base2" type="Area3D" parent="." groups=["base", "green"]]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 45.9619, 6, 45.9619)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Base2"]
+shape = SubResource("BoxShape3D_8fwug")
+
+[node name="Base3" type="Area3D" parent="." groups=["base", "yellow"]]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -45.9619, 6, -45.9619)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Base3"]
+shape = SubResource("BoxShape3D_bielj")
+
+[node name="SpawnPoint0" type="Node3D" parent="."]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -38.8909, 1.09218, 38.8909)
+
+[node name="SpawnPoint1" type="Node3D" parent="."]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 38.8909, 1.09218, -38.8909)
+
+[node name="SpawnPoint2" type="Node3D" parent="."]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 38.8909, 1.09218, 38.8909)
+
+[node name="SpawnPoint3" type="Node3D" parent="."]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, -38.8909, 1.09218, -38.8909)
+
+[node name="DefaultLevel" parent="." instance=ExtResource("2_ktxh1")]
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(0.707107, -0.707107, -3.09086e-08, 0, -4.37114e-08, 1, -0.707107, -0.707107, -3.09086e-08, -44.8328, 8.71558, 44.8328)
+light_color = Color(1, 0, 0.0352941, 1)
+spot_range = 16.3146
+spot_attenuation = 0.00153239
+spot_angle = 68.28
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="."]
+transform = Transform3D(0.707107, -0.707107, -3.09086e-08, 0, -4.37114e-08, 1, -0.707107, -0.707107, -3.09086e-08, -44.833, 8.716, -44.833)
+light_color = Color(1, 1, 0, 1)
+spot_range = 16.3146
+spot_attenuation = 0.00153239
+spot_angle = 68.28
+
+[node name="SpotLight3D3" type="SpotLight3D" parent="."]
+transform = Transform3D(0.707107, -0.707107, -3.09086e-08, 0, -4.37114e-08, 1, -0.707107, -0.707107, -3.09086e-08, 44.833, 8.716, 44.833)
+light_color = Color(0, 1, 0, 1)
+spot_range = 16.3146
+spot_attenuation = 0.00153239
+spot_angle = 68.28
+
+[node name="SpotLight3D4" type="SpotLight3D" parent="."]
+transform = Transform3D(0.707107, -0.707107, -3.09086e-08, 0, -4.37114e-08, 1, -0.707107, -0.707107, -3.09086e-08, 44.833, 8.716, -44.833)
+light_color = Color(0, 0, 1, 1)
+light_energy = 16.0
+spot_range = 16.3146
+spot_attenuation = 0.00153239
+spot_angle = 68.28
+
+[connection signal="body_entered" from="Base0" to="LevelManager" method="_on_base_red_body_entered"]
+[connection signal="body_entered" from="Base1" to="LevelManager" method="_on_base_blue_body_entered"]
+[connection signal="body_entered" from="Base2" to="LevelManager" method="_on_base_green_body_entered"]
+[connection signal="body_entered" from="Base3" to="LevelManager" method="_on_base_yellow_body_entered"]
