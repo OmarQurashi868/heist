@@ -2,11 +2,10 @@ extends State
 
 
 func on_enter():
-	player.animation_player.play("run")
+	player.animation_player.play("idle")
 
 func phys_proc(delta):
 	player.handle_movement(delta)
-	
 	player.handle_jump(delta)
 	
 	if not player.is_on_floor():

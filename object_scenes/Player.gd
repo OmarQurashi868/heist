@@ -60,11 +60,11 @@ func handle_movement(delta, factor: float = 1.0):
 		rotation.y += -rot_dir * delta * ROTATION_SPEED
 		
 		velocity.x *= factor
-		velocity.y *= factor
+		velocity.z *= factor
 
 
 func handle_jump(delta):
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_just_pressed("ui_accept"):
 		velocity.y = JUMP_VELOCITY
 
 
