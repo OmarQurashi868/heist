@@ -29,6 +29,16 @@ gdscript/warnings/unused_variable=0
 window/size/viewport_width=1280
 window/size/viewport_height=720
 
+[file_customization]
+
+folder_colors={
+"res://assets/": "orange",
+"res://classes/": "gray",
+"res://object_scenes/": "red",
+"res://resources/": "purple",
+"res://scenes/": "blue"
+}
+
 [filesystem]
 
 import/fbx/enabled=false
