@@ -187,9 +187,8 @@ func get_player_by_id(player_id: int) -> CharacterBody3D:
 	return null
 
 
-func respawn_player(player):
+func respawn_player(player: Player):
 	player.global_position = teams[player.team_id].spawn_position
 	# Rotate  camera to the center of the map
 	player.look_at(Vector3(0, player.position.y, 0))
-	player.is_dead = false
-	player.health = player.FULL_HEALTH
+	player.state_machine.spawn_player()

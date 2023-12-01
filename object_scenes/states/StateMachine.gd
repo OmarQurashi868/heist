@@ -21,3 +21,11 @@ func change_state(new_state: String):
 	current_state.on_exit()
 	current_state = get_node(new_state) as State
 	current_state.on_enter()
+
+
+func spawn_player():
+	player.health = player.FULL_HEALTH
+	player.animation_tree.set("parameters/dead/transition_request", "alive")
+	player.is_dead = false
+	player.is_stunned = false
+	change_state("Base")

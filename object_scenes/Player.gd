@@ -81,7 +81,6 @@ func take_damage(attack: Attack):
 			game_manager.drop_bag()
 		health -= attack.damage
 		velocity = (position - attack.knockback_source) * attack.knockback_force
-		is_stunned = true
 		get_tree().create_timer(attack.stun_timer).timeout.connect(func(): state_machine.change_state("Base"))
 		if health <= 0:
 			die()
@@ -90,9 +89,8 @@ func take_damage(attack: Attack):
 
 func die():
 	velocity = Vector3.ZERO
-	is_dead = true
-	$DeathSFX.play()
 	get_tree().create_timer(RESPAWN_TIMER).timeout.connect(func(): game_manager.respawn_player(self))
+	state_machine.change_state("Dead")
 
 
 func stop_attack():

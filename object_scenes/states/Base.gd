@@ -2,7 +2,7 @@ extends State
 
 
 func on_enter():
-	player.animation_tree.set("parameters/Transition/transition_request", "base")
+	player.animation_tree.set("parameters/basejumpfall/transition_request", "base")
 
 func phys_proc(delta):
 	player.handle_movement(delta)
