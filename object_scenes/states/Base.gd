@@ -9,7 +9,7 @@ func phys_proc(delta):
 	player.handle_jump(delta)
 	player.handle_attack()
 	
-	player.animation_tree.set("parameters/base/blend_position", Vector2(0, player.forward_vector / player.SPEED ) )
+	player.animation_tree.set("parameters/base/blend_position", Vector2(player.side_vector, player.forward_vector / player.SPEED ) )
 	
 	if not player.is_on_floor():
 		if player.velocity.y > 0:

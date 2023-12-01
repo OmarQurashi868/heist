@@ -23,6 +23,7 @@ var has_money = false
 var is_stunned = false
 var is_dead = false
 var forward_vector = 0.0
+var side_vector = 0.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -69,6 +70,7 @@ func handle_movement(delta, factor: float = 1.0):
 		velocity.x *= factor
 		velocity.z *= factor
 		forward_vector = velocity.dot(-transform.basis.z)
+		side_vector = move_toward(side_vector, rot_dir, ACCEL)
 		
 
 

@@ -43,7 +43,7 @@ func _ready():
 func initialize_game():
 	var level_scene = load(level_scene_path)
 	var level = level_scene.instantiate()
-	$"..".add_child(level)
+	get_parent().add_child(level)
 	prepare_teams()
 	get_tree().root.size_changed.connect(on_viewport_size_changed)
 	if LobbyManager.local_players_num == 1:
@@ -55,6 +55,8 @@ func initialize_game():
 	for i in range(LobbyManager.local_players_num):
 		spawn_player(i, i % 4)
 	on_viewport_size_changed()
+	LobbyManager.on_loading_end()
+
 
 func on_viewport_size_changed():
 	var current_resolution = DisplayServer.window_get_size()

@@ -10,26 +10,28 @@ var is_cashed_in = false
 var carrier: CharacterBody3D
 var angle = 0
 var money_bag_void_pos = Vector3(999, 999, 999)
+var is_parent_ready = false
 
 
 func _ready():
 	#position = money_bag_void_pos
 	#game_manager.respawn_bag.call_deferred()
-	pass
+	get_node("../GameManager").ready.connect(func(): is_parent_ready = true)
 
 # Called when the node enters the scene tree for the first time.
 func _physics_process(delta):
-	if is_picked_up and carrier:
-		var slot = carrier.get_node("MoneyBagSlot")
-		position.x = move_toward(position.x, slot.global_position.x, speed * delta)
-		position.y = move_toward(position.y, slot.global_position.y, speed * delta)
-		position.z = move_toward(position.z, slot.global_position.z, speed * delta)
-	elif not is_cashed_in:
-		angle += 2 * 3.14 * delta
-		var spawn_pos = get_node("../" + LobbyManager.current_map + "/MoneyBagSpawn").global_position
-		position.x = move_toward(position.x, spawn_pos.x, delta)
-		position.z = move_toward(position.z, spawn_pos.z, delta)
-		position.y = spawn_pos.y + sin(angle * freq) * amp
+	if (is_parent_ready):
+		if is_picked_up and carrier:
+			var slot = carrier.get_node("MoneyBagSlot")
+			position.x = move_toward(position.x, slot.global_position.x, speed * delta)
+			position.y = move_toward(position.y, slot.global_position.y, speed * delta)
+			position.z = move_toward(position.z, slot.global_position.z, speed * delta)
+		elif not is_cashed_in:
+			angle += 2 * 3.14 * delta
+			var spawn_pos = get_node("../" + LobbyManager.current_map + "/MoneyBagSpawn").global_position
+			position.x = move_toward(position.x, spawn_pos.x, delta)
+			position.z = move_toward(position.z, spawn_pos.z, delta)
+			position.y = spawn_pos.y + sin(angle * freq) * amp
 
 
 func _on_body_entered(body):
