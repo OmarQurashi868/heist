@@ -32,7 +32,7 @@ func try_deal_damage(target: Player):
 
 func start_attack():
 	if is_active and not is_attacking and can_attack and animation_name:
-		weapon_owner.anim.play(animation_name)
+		#weapon_owner.anim.play(animation_name)
 		is_attacking = true
 		weapon_attack.knockback_source = weapon_owner.position
 		if weapon_type == WEAPON_TYPES.HITSCAN:

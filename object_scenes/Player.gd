@@ -6,6 +6,7 @@ class_name Player
 @onready var aimray = $AimRay
 @onready var state_machine = $StateMachine as StateMachine
 @onready var animation_player = $weasel/AnimationPlayer as AnimationPlayer
+@onready var animation_tree = $AnimationTree as AnimationTree
 
 var player_id = 0
 var team_id
@@ -17,9 +18,11 @@ const SPEED = 8.0
 const JUMP_VELOCITY = 15.0
 const ROTATION_SPEED = 1.5
 const GRAVITY_FACTOR = 4.0
+const ACCEL = 0.5
 var has_money = false
 var is_stunned = false
 var is_dead = false
+var forward_vector = 0.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -33,14 +36,18 @@ func _physics_process(delta):
 	handle_gravity(delta)
 	state_machine.phys_proc(delta)
 	
-	#if Input.is_action_just_pressed("attack") and not is_dead and not is_stunned:
-		#weapon.start_attack()
-		# TODO
+	
 	
 	#handle_jump(delta)
 	#handle_movement(delta)
 	
 	move_and_slide()
+
+func handle_attack():
+	if Input.is_action_just_pressed("attack"):
+		weapon.start_attack()
+		state_machine.change_state("Swing")
+		
 
 
 func handle_gravity(delta):
@@ -55,12 +62,14 @@ func handle_movement(delta, factor: float = 1.0):
 		var rot_dir = Input.get_axis("ui_left", "ui_right")
 		var direction = Vector2.from_angle(rotation.y)
 		
-		velocity.x = move_toward(velocity.x, -direction.y * SPEED * move_dir, SPEED)
-		velocity.z = move_toward(velocity.z, -direction.x * SPEED * move_dir, SPEED)
+		velocity.x = move_toward(velocity.x, -direction.y * SPEED * move_dir, ACCEL)
+		velocity.z = move_toward(velocity.z, -direction.x * SPEED * move_dir, ACCEL)
 		rotation.y += -rot_dir * delta * ROTATION_SPEED
 		
 		velocity.x *= factor
 		velocity.z *= factor
+		forward_vector = velocity.dot(-transform.basis.z)
+		
 
 
 func handle_jump(delta):
