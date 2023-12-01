@@ -17,7 +17,6 @@ func phys_proc(delta):
 	current_state.phys_proc(delta)
 
 
-
 func change_state(new_state: String):
 	current_state.on_exit()
 	current_state = get_node(new_state) as State
