@@ -16,7 +16,7 @@ var is_parent_ready = false
 func _ready():
 	#position = money_bag_void_pos
 	#game_manager.respawn_bag.call_deferred()
-	get_node("../GameManager").ready.connect(func(): is_parent_ready = true)
+	get_node("../GameManager").game_setup.connect(func(): is_parent_ready = true)
 
 # Called when the node enters the scene tree for the first time.
 func _physics_process(delta):

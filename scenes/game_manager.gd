@@ -35,6 +35,7 @@ var teams: Array[Team] = [
 	Team.new("yellow", Color(1.0, 1.0, 0, 1))
 ]
 
+signal game_setup
 
 func _ready():
 	initialize_game.call_deferred()
@@ -56,7 +57,7 @@ func initialize_game():
 		spawn_player(i, i % 4)
 	on_viewport_size_changed()
 	LobbyManager.on_loading_end()
-
+	game_setup.emit()
 
 func on_viewport_size_changed():
 	var current_resolution = DisplayServer.window_get_size()

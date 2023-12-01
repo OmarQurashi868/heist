@@ -37,18 +37,13 @@ func _physics_process(delta):
 	handle_gravity(delta)
 	state_machine.phys_proc(delta)
 	
-	
-	
-	#handle_jump(delta)
-	#handle_movement(delta)
-	
 	move_and_slide()
 
+#region Handlers
 func handle_attack():
 	if Input.is_action_just_pressed("attack"):
 		weapon.start_attack()
 		state_machine.change_state("Swing")
-		
 
 
 func handle_gravity(delta):
@@ -71,13 +66,14 @@ func handle_movement(delta, factor: float = 1.0):
 		velocity.z *= factor
 		forward_vector = velocity.dot(-transform.basis.z)
 		side_vector = move_toward(side_vector, rot_dir, ACCEL)
-		
 
 
 func handle_jump(delta):
 	if Input.is_action_just_pressed("ui_accept"):
 		velocity.y = JUMP_VELOCITY
 
+
+#endregion
 
 func take_damage(attack: Attack):
 	if not is_dead and not is_stunned:
@@ -86,10 +82,10 @@ func take_damage(attack: Attack):
 		health -= attack.damage
 		velocity = (position - attack.knockback_source) * attack.knockback_force
 		is_stunned = true
-		$DamageSFX.play()
-		get_tree().create_timer(attack.stun_timer).timeout.connect(func(): is_stunned = false)
+		get_tree().create_timer(attack.stun_timer).timeout.connect(func(): state_machine.change_state("Base"))
 		if health <= 0:
 			die()
+		state_machine.change_state("Hurt")
 
 
 func die():
