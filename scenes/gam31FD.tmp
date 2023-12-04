@@ -1,0 +1,80 @@
+[gd_scene load_steps=7 format=3 uid="uid://dqgh0ag1pa1br"]
+
+[ext_resource type="Script" path="res://scenes/game_manager.gd" id="1_f05ku"]
+[ext_resource type="AudioStream" uid="uid://cg37bhrunv0hh" path="res://assets/audio/placeholder background music.mp3" id="3_tqsfw"]
+[ext_resource type="PackedScene" uid="uid://r7w2hg7uhym4" path="res://object_scenes/money_bag.tscn" id="4_e1qbj"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4b2yv"]
+
+[sub_resource type="Sky" id="Sky_fmplq"]
+sky_material = SubResource("ProceduralSkyMaterial_4b2yv")
+
+[sub_resource type="Environment" id="Environment_pij7h"]
+background_mode = 2
+background_camera_feed_id = 7
+sky = SubResource("Sky_fmplq")
+ambient_light_source = 3
+ambient_light_color = Color(0.870588, 0.87451, 0.619608, 1)
+reflected_light_source = 2
+tonemap_mode = 3
+
+[node name="Game" type="Node3D"]
+
+[node name="GameManager" type="Node3D" parent="."]
+script = ExtResource("1_f05ku")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_pij7h")
+
+[node name="MoneyBag" parent="." instance=ExtResource("4_e1qbj")]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 1.63489, 0)
+
+[node name="GridContainer" type="GridContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 120
+alignment = 1
+
+[node name="ScoreLabel0" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 86
+text = "0"
+
+[node name="ScoreLabel1" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.537255, 0.964706, 1)
+theme_override_font_sizes/font_size = 86
+text = "0"
+
+[node name="ScoreLabel2" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.129412, 0.647059, 0, 1)
+theme_override_font_sizes/font_size = 86
+text = "0"
+
+[node name="ScoreLabel3" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 0, 1)
+theme_override_font_sizes/font_size = 86
+text = "0"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_tqsfw")
+volume_db = -24.09
+autoplay = true

@@ -89,14 +89,14 @@ func spawn_player(player_id: int, team_id: int) -> void:
 	parent_and_adjust.call_deferred(player, teams[team_id].spawn_position)
 	
 	# Change the material for each player
-	var mesh: MeshInstance3D = player.get_node("MeshInstance3D")
+	var mesh: MeshInstance3D = player.get_node("weasel/rig/Skeleton3D/Body")
 	var new_material = StandardMaterial3D.new()
 	new_material.albedo_color = teams[team_id].color
-	mesh.material_override = new_material
+	mesh.set_surface_override_material(2, new_material)
 	
 	# Declare and rename cameras
 	var camera_node = player.get_node("Camera3D")
-	var camera_slot = player.get_node("CameraSlot")
+	var camera_slot = player.get_node("CameraArm/CameraSlot")
 	camera_node.name += str(player_id)
 	
 	# Create new subviewport

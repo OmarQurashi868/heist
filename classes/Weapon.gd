@@ -26,8 +26,8 @@ func try_deal_damage(target: Player):
 	if target\
 	and target.has_method("take_damage")\
 	and is_attacking\
-	and weapon_owner and target\
-	and weapon_owner.team_id != target.team_id:
+	and weapon_owner\
+	and target != weapon_owner:
 		target.take_damage(weapon_attack)
 
 func start_attack():

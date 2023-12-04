@@ -9,7 +9,7 @@ func on_enter():
 	player.is_stunned = true
 
 
-func phys_proc(delta):
+func phys_proc(_delta):
 	player.velocity = player.velocity.move_toward(Vector3(0, player.velocity.y, 0), player.ACCEL)
 
 

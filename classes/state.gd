@@ -17,5 +17,5 @@ func on_exit():
 	pass
 
 
-func phys_proc(delta):
+func phys_proc(_delta):
 	pass
