@@ -16,7 +16,7 @@ const FULL_HEALTH = 10.0
 @export var health = 10.0
 @export var weapon: Weapon
 const RESPAWN_TIMER = 1
-const SPEED = 8.0
+const SPEED = 10.0
 const JUMP_VELOCITY = 15.0
 const ROTATION_SPEED = 1.5
 const GRAVITY_FACTOR = 4.0
@@ -49,18 +49,20 @@ func handle_gravity(delta):
 		velocity.y -= gravity * delta * GRAVITY_FACTOR
 
 func handle_movement(_delta, factor: float = 1.0):
-		var input_vec = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down").normalized()
-		input_vec = Vector3(input_vec.x, 0, input_vec.y)
+		var input_vec = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+		var input_vec_3d = Vector3(input_vec.x, 0, input_vec.y)
 		
 		var basis_z_2d = Vector2(-transform.basis.z.x, -transform.basis.z.z)
 		var cam_basis_z_2d = Vector2(camera_arm.transform.basis.z.x, -camera_arm.transform.basis.z.z)
-		var movement_vec = input_vec.rotated(transform.basis.y, basis_z_2d.angle_to(cam_basis_z_2d))
-		camera_arm.rotate_y(-input_vec.x / 30)
+		var movement_vec = input_vec_3d.rotated(transform.basis.y, basis_z_2d.angle_to(cam_basis_z_2d))
 		var move_vec_2d = Vector2(movement_vec.x, movement_vec.z)
-		print(move_vec_2d.angle_to(basis_z_2d))
-		rotation.y += move_vec_2d.angle_to(basis_z_2d)
-		#rotation.y = rotate_toward(rotation.y, move_vec_2d.angle_to(basis_z_2d), 0.01)
-		camera_arm.rotation.y -= move_vec_2d.angle_to(basis_z_2d)
+		
+		camera_arm.rotate_y(-input_vec_3d.x / 30)
+		#rotation.y += move_vec_2d.angle_to(basis_z_2d)
+		rotation.y = rotate_toward(rotation.y, rotation.y + move_vec_2d.angle_to(basis_z_2d), 0.1)
+		#camera_arm.rotation.y -= move_vec_2d.angle_to(basis_z_2d)
+		camera_arm.rotation.y = rotate_toward(camera_arm.rotation.y, camera_arm.rotation.y-move_vec_2d.angle_to(basis_z_2d), 0.1)
+		camera_arm.rotation.y = lerp_angle(camera_arm.rotation.y, 0, 0.01)
 		
 		movement_vec *= SPEED
 		velocity.x = move_toward(velocity.x, movement_vec.x, ACCEL)
@@ -70,8 +72,8 @@ func handle_movement(_delta, factor: float = 1.0):
 		velocity.z *= factor
 		
 		forward_vector = velocity.dot(-transform.basis.z)
-		# TODO
-		side_vector = 0
+		var turning_angle = velocity.rotated(transform.basis.y, -rotation.y).signed_angle_to(input_vec_3d, transform.basis.y)
+		side_vector = sin(-turning_angle)
 
 func handle_jump(_delta):
 	if Input.is_action_just_pressed("ui_accept"):

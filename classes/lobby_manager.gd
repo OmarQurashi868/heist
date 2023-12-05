@@ -6,7 +6,7 @@ var requested_scene_path: String = "res://scenes/levels/level_test.tscn"
 var requested_scene: Node3D
 var current_root_node: Window
 var is_local_game = true
-var local_players_num = 4
+var local_players_num = 1
 var load_progress: Array = [0.0]
 var fake_progress: float = 0.0
 
