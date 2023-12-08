@@ -18,11 +18,11 @@ class Team:
 		self.score += 1
 
 @onready var money_bag: Area3D = $"../MoneyBag"
-@onready var money_bag_scene: PackedScene = preload("res://object_scenes/money_bag.tscn")
+@onready var money_bag_scene: PackedScene = preload("res://scenes/entities/money_bag.tscn")
 @onready var grid_container: GridContainer = $"../GridContainer"
-@onready var sub_viewport_container: PackedScene = preload("res://object_scenes/sub_viewport_container.tscn")
+@onready var sub_viewport_container: PackedScene = preload("res://scenes/game/sub_viewport_container.tscn")
 @onready var score_label_path: String = "../HBoxContainer/ScoreLabel"
-@export var player_scene: PackedScene = preload("res://object_scenes/player.tscn")
+@export var player_scene: PackedScene = preload("res://scenes/entities/player.tscn")
 #@export_range(2,8) var local_players_num = 4
 
 var level_scene_path = LobbyManager.current_map_path

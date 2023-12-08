@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://dqgh0ag1pa1br"]
 
-[ext_resource type="Script" path="res://scenes/game_manager.gd" id="1_f05ku"]
+[ext_resource type="Script" path="res://scenes/game/game_manager.gd" id="1_f05ku"]
 [ext_resource type="AudioStream" uid="uid://cg37bhrunv0hh" path="res://assets/audio/placeholder background music.mp3" id="3_tqsfw"]
-[ext_resource type="PackedScene" uid="uid://r7w2hg7uhym4" path="res://object_scenes/money_bag.tscn" id="4_e1qbj"]
+[ext_resource type="PackedScene" uid="uid://r7w2hg7uhym4" path="res://scenes/entities/money_bag.tscn" id="4_e1qbj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_4b2yv"]
 
@@ -77,3 +77,4 @@ text = "0"
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_tqsfw")
 volume_db = -24.09
+autoplay = true

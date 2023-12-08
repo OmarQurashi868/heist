@@ -11,14 +11,14 @@ config_version=5
 [application]
 
 config/name="Heist"
-run/main_scene="res://scenes/main_menu.tscn"
+run/main_scene="res://scenes/game/main_menu.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
-LobbyManager="*res://classes/lobby_manager.gd"
-LoadingScreen="*res://scenes/loading_screen.tscn"
+LobbyManager="*res://scripts/lobby_manager.gd"
+LoadingScreen="*res://scenes/game/loading_screen.tscn"
 
 [debug]
 
@@ -33,10 +33,9 @@ window/size/viewport_height=720
 
 folder_colors={
 "res://assets/": "orange",
-"res://classes/": "gray",
-"res://object_scenes/": "red",
 "res://resources/": "purple",
-"res://scenes/": "blue"
+"res://scenes/": "blue",
+"res://scripts/": "gray"
 }
 
 [filesystem]

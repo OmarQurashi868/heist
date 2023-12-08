@@ -5,7 +5,7 @@ class Level:
 	var lvl_path: String
 	var lvl_id: int
 
-@onready var game_scene_path = "res://scenes/game.tscn"
+@onready var game_scene_path = "res://scenes/game/game.tscn"
 @onready var menu_container = get_node("MarginContainer/MenuSeperator")
 enum MENUES {LOCAL, ONLINE, OPTIONS}
 var levels_path = "res://scenes/levels"
