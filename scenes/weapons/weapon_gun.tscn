@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://bqb1q5rwjj2fp"]
 
-[ext_resource type="Script" path="res://scenes/weapons/weapon_gun.gd" id="1_1u5l2"]
+[ext_resource type="Script" path="res://scripts/weapon_hitscan.gd" id="1_l1wjt"]
 [ext_resource type="PackedScene" uid="uid://c3607c6xky66b" path="res://assets/models/gun.blend" id="2_vxxyu"]
 [ext_resource type="Texture2D" uid="uid://dcuwknhlj2ybm" path="res://assets/textures/muzzle_flash_fire.png" id="3_wfkc0"]
 [ext_resource type="AudioStream" uid="uid://ct2o0g56ewwaq" path="res://assets/audio/gunshot.mp3" id="4_ssoyx"]
@@ -27,7 +27,9 @@ material = SubResource("StandardMaterial3D_t0o2v")
 size = Vector2(0.7, 0.7)
 
 [node name="WeaponGun" type="Node3D"]
-script = ExtResource("1_1u5l2")
+script = ExtResource("1_l1wjt")
+weapon_name = "pistol"
+weapon_tier = 1
 
 [node name="gun" parent="." instance=ExtResource("2_vxxyu")]
 transform = Transform3D(0.275, 0, 0, 0, 0.275, 0, 0, 0, 0.275, 0, 0, 0)

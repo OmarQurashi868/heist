@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cwxhhma5wquy5"]
 
 [ext_resource type="PackedScene" uid="uid://de2mwft7p7gxx" path="res://assets/models/great_sword.blend" id="1_2g8v2"]
-[ext_resource type="Script" path="res://scenes/weapons/weapon_sword.gd" id="1_pffqi"]
+[ext_resource type="Script" path="res://scripts/weapon_melee.gd" id="1_lc2lm"]
 [ext_resource type="AudioStream" uid="uid://dxb8s3em7flaf" path="res://assets/audio/swing.mp3" id="3_7e70p"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_qeqmu"]
@@ -10,7 +10,9 @@ height = 8.49749
 
 [node name="WeaponSword" type="Node3D"]
 transform = Transform3D(0.28, 0, 0, 0, 0.28, 0, 0, 0, 0.28, 0, 0, 0)
-script = ExtResource("1_pffqi")
+script = ExtResource("1_lc2lm")
+weapon_name = "sword"
+weapon_tier = 3
 
 [node name="great_sword" parent="." instance=ExtResource("1_2g8v2")]
 transform = Transform3D(0.695, 0, 0, 0, 0.695, 0, 0, 0, 0.695, -0.0046401, 1.19209e-07, -0.00849366)

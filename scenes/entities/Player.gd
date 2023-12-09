@@ -3,7 +3,6 @@ class_name Player
 
 @onready var game_manager: Node3D = $"../GameManager"
 @onready var anim: AnimationPlayer = $AnimationPlayer
-@onready var aimray = $weasel/AimRay
 @onready var state_machine = $StateMachine as StateMachine
 @onready var animation_player = $weasel/AnimationPlayer as AnimationPlayer
 @onready var animation_tree = $AnimationTree as AnimationTree
@@ -32,7 +31,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 
 func _ready():
-	weapon = $WeaponBat
+	weapon = $WeaponGun
 	weapon.weapon_owner = self
 
 
@@ -81,7 +80,7 @@ func handle_jump(_delta):
 
 func handle_attack():
 	if Input.is_action_just_pressed("attack"):
-		weapon.start_attack()
+		weapon.attack()
 		state_machine.change_state("Swing")
 #endregion
 
@@ -96,6 +95,7 @@ func take_damage(attack: Attack):
 		if health <= 0:
 			die()
 		state_machine.change_state("Hurt")
+		look_at(attack.knockback_source, transform.basis.y)
 
 func die():
 	velocity = Vector3.ZERO
