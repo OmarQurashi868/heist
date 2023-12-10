@@ -31,7 +31,8 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 
 func _ready():
-	weapon = $WeaponGun
+	weapon = $WeaponSword
+	$weasel/rig/Skeleton3D/BoneAttachment3D/RemoteTransform3D.remote_path = weapon.get_path()
 	weapon.weapon_owner = self
 
 
@@ -81,7 +82,7 @@ func handle_jump(_delta):
 func handle_attack():
 	if Input.is_action_just_pressed("attack"):
 		weapon.attack()
-		state_machine.change_state("Swing")
+		state_machine.change_state("Attack")
 #endregion
 
 #region Combat
@@ -95,7 +96,7 @@ func take_damage(attack: Attack):
 		if health <= 0:
 			die()
 		state_machine.change_state("Hurt")
-		look_at(attack.knockback_source, transform.basis.y)
+		#look_at(attack.knockback_source, transform.basis.y)
 
 func die():
 	velocity = Vector3.ZERO

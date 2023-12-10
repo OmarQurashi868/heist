@@ -5,7 +5,7 @@ func on_enter():
 	player.animation_tree.set("parameters/basejumpfall/transition_request", "base")
 
 func phys_proc(delta):
-	player.handle_movement(delta)
+	player.handle_movement(delta, (player.SPEED - player.weapon.weight) / player.SPEED)
 	player.handle_jump(delta)
 	player.handle_attack()
 	

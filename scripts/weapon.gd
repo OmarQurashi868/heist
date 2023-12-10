@@ -4,6 +4,8 @@ class_name Weapon
 @export var weapon_name: String
 @export var weapon_tier: int
 @export var cooldown_duration: float
+@export var weight: float = 0
+@export var can_attack_move: bool = false
 @export var animation_name: String
 @export var equipped = true
 
@@ -16,8 +18,6 @@ var can_attack = true
 
 func _ready():
 	weapon_attack = weapon_data.attacks[weapon_name]
-	cooldown_duration = weapon_data.cooldowns[weapon_name]
-	animation_name = weapon_data.anims[weapon_name]
 
 
 func attack():
