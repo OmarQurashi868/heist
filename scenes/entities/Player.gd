@@ -31,7 +31,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 
 func _ready():
-	weapon = $WeaponSword
+	weapon = $WeaponBat
 	$weasel/rig/Skeleton3D/BoneAttachment3D/RemoteTransform3D.remote_path = weapon.get_path()
 	weapon.weapon_owner = self
 
@@ -57,12 +57,18 @@ func handle_movement(_delta, factor: float = 1.0):
 		var movement_vec = input_vec_3d.rotated(transform.basis.y, basis_z_2d.angle_to(cam_basis_z_2d))
 		var move_vec_2d = Vector2(movement_vec.x, movement_vec.z)
 		
+		# Rotate camera left or right according to player input
 		camera_arm.rotate_y(-input_vec_3d.x / 30)
-		#rotation.y += move_vec_2d.angle_to(basis_z_2d)
+		
+		# Rotate player so it's facing its movement vector (so it looks to where it's going)#
 		rotation.y = rotate_toward(rotation.y, rotation.y + move_vec_2d.angle_to(basis_z_2d), 0.1)
-		#camera_arm.rotation.y -= move_vec_2d.angle_to(basis_z_2d)
+		
+		# Counteract player rotation so the camera is stationary
 		camera_arm.rotation.y = rotate_toward(camera_arm.rotation.y, camera_arm.rotation.y-move_vec_2d.angle_to(basis_z_2d), 0.1)
-		camera_arm.rotation.y = lerp_angle(camera_arm.rotation.y, 0, 0.01)
+		
+		# Slowly pan back camera to behind the character
+		#camera_arm.rotation.y = lerp_angle(camera_arm.rotation.y, 0, 0.01)
+		#camera_arm.rotation.y = rotate_toward(camera_arm.rotation.y, 0, 0.01)
 		
 		movement_vec *= SPEED
 		velocity.x = move_toward(velocity.x, movement_vec.x, ACCEL)
@@ -71,9 +77,9 @@ func handle_movement(_delta, factor: float = 1.0):
 		velocity.x *= factor
 		velocity.z *= factor
 		
-		forward_vector = velocity.dot(-transform.basis.z)
-		var turning_angle = velocity.rotated(transform.basis.y, -rotation.y).signed_angle_to(input_vec_3d, transform.basis.y)
-		side_vector = sin(-turning_angle)
+		forward_vector = Vector2(velocity.x, velocity.z).length()
+		var turning_angle = transform.basis.z.signed_angle_to(movement_vec, transform.basis.y)
+		side_vector = sin(turning_angle)
 
 func handle_jump(_delta):
 	if Input.is_action_just_pressed("ui_accept"):
