@@ -49,37 +49,48 @@ func handle_gravity(delta):
 		velocity.y -= gravity * delta * GRAVITY_FACTOR
 
 func handle_movement(_delta, factor: float = 1.0):
-		var input_vec = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-		var input_vec_3d = Vector3(input_vec.x, 0, input_vec.y)
-		
-		var basis_z_2d = Vector2(-transform.basis.z.x, -transform.basis.z.z)
-		var cam_basis_z_2d = Vector2(camera_arm.transform.basis.z.x, -camera_arm.transform.basis.z.z)
-		var movement_vec = input_vec_3d.rotated(transform.basis.y, basis_z_2d.angle_to(cam_basis_z_2d))
-		var move_vec_2d = Vector2(movement_vec.x, movement_vec.z)
-		
-		# Rotate camera left or right according to player input
-		camera_arm.rotate_y(-input_vec_3d.x / 30)
-		
+	var cam_basis = camera_arm.global_transform.basis # Might want to use `global_transform` instead?
+
+	var cam_forward = -cam_basis.z
+	var cam_right = cam_basis.x
+
+	var cam_forward_xz = Vector3(cam_forward.x, 0, cam_forward.z).normalized()
+	var cam_right_xz = Vector3(cam_right.x, 0, cam_right.z).normalized()
+	#end
+	
+	var input_vec = Input.get_vector("ui_left", "ui_right", "ui_down", "ui_up")
+	var input_vec_3d = Vector3(input_vec.x, 0, input_vec.y)
+	
+	var basis_z_2d = Vector2(-transform.basis.z.x, -transform.basis.z.z)
+	var cam_basis_z_2d = Vector2(camera_arm.transform.basis.z.x, -camera_arm.transform.basis.z.z)
+	
+	#var movement_vec = input_vec_3d.rotated(transform.basis.y, basis_z_2d.angle_to(cam_basis_z_2d))
+	var movement_vec = input_vec.x * cam_right_xz + input_vec.y * cam_forward_xz
+	var move_vec_2d = Vector2(movement_vec.x, movement_vec.z)
+	
+	# Rotate camera left or right according to player input
+	camera_arm.rotate_y(-input_vec_3d.x / 30)
+	
+	if move_vec_2d != Vector2.ZERO:
 		# Rotate player so it's facing its movement vector (so it looks to where it's going)#
 		rotation.y = rotate_toward(rotation.y, rotation.y + move_vec_2d.angle_to(basis_z_2d), 0.1)
-		
 		# Counteract player rotation so the camera is stationary
 		camera_arm.rotation.y = rotate_toward(camera_arm.rotation.y, camera_arm.rotation.y-move_vec_2d.angle_to(basis_z_2d), 0.1)
-		
+	if move_vec_2d == Vector2.ZERO:
 		# Slowly pan back camera to behind the character
-		#camera_arm.rotation.y = lerp_angle(camera_arm.rotation.y, 0, 0.01)
+		camera_arm.rotation.y = lerp_angle(camera_arm.rotation.y, 0, 0.01)
 		#camera_arm.rotation.y = rotate_toward(camera_arm.rotation.y, 0, 0.01)
-		
-		movement_vec *= SPEED
-		velocity.x = move_toward(velocity.x, movement_vec.x, ACCEL)
-		velocity.z = move_toward(velocity.z, movement_vec.z, ACCEL)
-		
-		velocity.x *= factor
-		velocity.z *= factor
-		
-		forward_vector = Vector2(velocity.x, velocity.z).length()
-		var turning_angle = transform.basis.z.signed_angle_to(movement_vec, transform.basis.y)
-		side_vector = sin(turning_angle)
+	
+	movement_vec *= SPEED
+	velocity.x = move_toward(velocity.x, movement_vec.x, ACCEL)
+	velocity.z = move_toward(velocity.z, movement_vec.z, ACCEL)
+	
+	velocity.x *= factor
+	velocity.z *= factor
+	
+	forward_vector = Vector2(velocity.x, velocity.z).length()
+	var turning_angle = transform.basis.z.signed_angle_to(movement_vec, transform.basis.y)
+	side_vector = sin(turning_angle)
 
 func handle_jump(_delta):
 	if Input.is_action_just_pressed("ui_accept"):
