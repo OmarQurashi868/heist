@@ -107,7 +107,7 @@ func take_damage(attack: Attack):
 	if not is_dead and not is_stunned:
 		if has_money:
 			game_manager.drop_bag()
-		health -= attack.damage
+		health  -= attack.damage
 		velocity = (position - attack.knockback_source) * attack.knockback_force
 		get_tree().create_timer(attack.stun_timer).timeout.connect(func(): state_machine.change_state("Base"))
 		if health <= 0:
