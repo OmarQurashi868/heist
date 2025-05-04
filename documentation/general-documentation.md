@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-"Heist" is a multiplayer game inspired by Conker's Bad Fur Day heist mode. In this game, players compete to collect money bags and return them to their team's base to score points, while battling other players who can stun them and steal the money.
+"Heist" is a demo remake multiplayer game of Conker's Bad Fur Day heist game mode. In this game, players compete to collect money bags and return them to their team's base to score points, while battling other players who can stun them and steal the money.
 
 ## Table of Contents
 
