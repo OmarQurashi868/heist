@@ -31,7 +31,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 
 func _ready():
-	weapon = $WeaponBat
+	weapon = $WeaponGun
 	$weasel/rig/Skeleton3D/BoneAttachment3D/RemoteTransform3D.remote_path = weapon.get_path()
 	weapon.weapon_owner = self
 
